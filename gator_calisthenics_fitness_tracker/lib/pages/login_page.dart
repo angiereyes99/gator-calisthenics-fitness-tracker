@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/google_signing_service.dart';
+import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -16,13 +17,19 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        decoration: primaryBackground,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlutterLogo(size: 150),
+              //Icon(Icons.directions_run, size: 80, color: Colors.white,),
+              Text(
+                'Gator Calisthenics Fitness Tracker', 
+                style: TextStyle(color: Colors.white, fontSize: 22.5),
+              ),
+              SizedBox(height: 25,),
+              Image(image: AssetImage("assets/sfsu_logo.png"), height: 135.0,),
               SizedBox(height: 50),
               _signInButton(),
             ],
@@ -34,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _signInButton() {
     return OutlineButton(
-      splashColor: Colors.grey,
+      splashColor: Colors.white,
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
@@ -50,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      borderSide: BorderSide(color: Colors.white,),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -64,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Sign in with Google',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.grey,
+                  color: Colors.white,
                 ),
               ),
             )

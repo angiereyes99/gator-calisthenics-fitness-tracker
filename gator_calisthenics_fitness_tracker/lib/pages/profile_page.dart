@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/login_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/google_signing_service.dart';
+import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -16,13 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Colors.blue[100], Colors.blue[400]],
-          ),
-        ),
+        decoration: primaryBackground,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -86,6 +81,22 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('Business'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            title: Text('School'),
+          ),
+        ],
       ),
     );
   }
