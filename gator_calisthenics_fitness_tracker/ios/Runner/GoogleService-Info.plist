@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>969739552520-q1p7airg44lfep7f02n0d4gbtoj7t5c6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.969739552520-q1p7airg44lfep7f02n0d4gbtoj7t5c6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC7EUY8NpNClS1PrRldN-Kbt2lBH2Iy92o</string>
+	<key>GCM_SENDER_ID</key>
+	<string>969739552520</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.gatorCalisthenicsFitnessTracker</string>
+	<key>PROJECT_ID</key>
+	<string>gatorcalisthenics</string>
+	<key>STORAGE_BUCKET</key>
+	<string>gatorcalisthenics.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:969739552520:ios:e90d6b99a8480a65da0ebd</string>
+	<key>DATABASE_URL</key>
+	<string>https://gatorcalisthenics.firebaseio.com</string>
+</dict>
+</plist>
