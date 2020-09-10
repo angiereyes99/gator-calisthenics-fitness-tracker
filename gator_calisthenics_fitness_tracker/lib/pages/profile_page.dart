@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 name,
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.deepPurple,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
@@ -57,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 email,
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.deepPurple,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
@@ -66,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
                 },
-                color: Colors.deepPurple,
+                color: Colors.green[900],
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -77,26 +77,37 @@ class _ProfilePageState extends State<ProfilePage> {
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40)),
-              )
+              ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.green[800],
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text('Profile'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
+            icon: Icon(Icons.directions_run),
+            title: Text('Workouts'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
+            icon: Icon(Icons.bookmark),
+            title: Text('Goals'),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.star),
+            title: Text('Favorites'),
+          ),
+          //  BottomNavigationBarItem(
+          //   icon: Icon(Icons.star),
+          //   title: Text('Favorites'),
+          // ),
         ],
+        selectedItemColor: Colors.yellowAccent,
       ),
     );
   }
