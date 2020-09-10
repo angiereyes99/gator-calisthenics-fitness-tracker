@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/login_page.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/workouts_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/google_signing_service.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
@@ -13,6 +14,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,33 +83,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.green[800],
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Profile'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.directions_run),
-            title: Text('Workouts'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            title: Text('Goals'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            title: Text('Favorites'),
-          ),
-          //  BottomNavigationBarItem(
-          //   icon: Icon(Icons.star),
-          //   title: Text('Favorites'),
-          // ),
-        ],
-        selectedItemColor: Colors.yellowAccent,
       ),
     );
   }

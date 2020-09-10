@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/workouts_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/google_signing_service.dart';
+import 'package:gator_calisthenics_fitness_tracker/services/main_navigation.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 
@@ -24,12 +26,12 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               //Icon(Icons.directions_run, size: 80, color: Colors.white,),
+              Image(image: AssetImage("assets/logo.png"), height: 125.0,),
+              SizedBox(height: 25,),
               Text(
                 'Gator Calisthenics Fitness Tracker', 
-                style: TextStyle(color: Colors.white, fontSize: 22.5),
+                style: TextStyle(color: Colors.white, fontSize: 21.5),
               ),
-              SizedBox(height: 25,),
-              Image(image: AssetImage("assets/sfsu_logo.png"), height: 135.0,),
               SizedBox(height: 50),
               _signInButton(),
             ],
@@ -48,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return ProfilePage();
+                  return MainNavigation();
                 },
               ),
             );
