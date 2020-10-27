@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 
 class RunningTrackerPage extends StatefulWidget {
@@ -13,118 +14,133 @@ class RunningTrackerPage extends StatefulWidget {
 
 class _RunningTrackerStatePage extends State<RunningTrackerPage> {
 
-  bool flag = true;
-  Stream<int> timerStream;
-  StreamSubscription<int> timerSubscription;    
-  // String hoursStr = '00';
-  String minutesStr = '00';
-  String secondsStr = '00';
+  final firestoreInstance = FirebaseFirestore.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
-  Stream<int> stopwatchStream() {
+  static const duration = const Duration(seconds: 1);
 
-  StreamController<int> streamController;
+  int secondsPassed = 0;
+  bool isActive = false;
+  bool hasSavedTime = false;
+
   Timer timer;
-  Duration timerInterval = Duration(seconds: 1);
-  int counter = 0;
 
-  void stopTimer() {
-
-    if (timer != null) {
-      timer.cancel();
-      timer = null;
-      counter = 0;
-      streamController.close();
+  void handleTick() {
+    if (isActive) {
+      setState(() {
+        secondsPassed = secondsPassed + 1;
+      });
     }
   }
-
-  void tick(_) {
-    counter++;
-    streamController.add(counter);
-    if (!flag) {
-      streamController.close();
-    }
-  }
-
-  void startTimer() {
-    timer = Timer.periodic(timerInterval, tick);
-  }
-
-  streamController = StreamController<int>(
-    onListen: startTimer,
-    onCancel: stopTimer,
-    onResume: startTimer,
-    onPause: stopTimer,
-  );
-
-  return streamController.stream;
-}
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: primaryBackground,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Text(
-                "$minutesStr:$secondsStr",
-                style: TextStyle(
-                  fontSize: 70.0,
+    if (timer == null) {
+      timer = Timer.periodic(duration, (Timer t) {
+        handleTick();
+      });
+    }
+    int seconds = secondsPassed % 60;
+    int minutes = secondsPassed ~/ 60;
+    int hours = secondsPassed ~/ (60 * 60);
+
+    return new Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.green,
+            title: new Text('Timer'),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    LabelText(
+                        label: 'HRS', value: hours.toString().padLeft(2, '0')),
+                    LabelText(
+                        label: 'MIN',
+                        value: minutes.toString().padLeft(2, '0')),
+                    LabelText(
+                        label: 'SEC',
+                        value: seconds.toString().padLeft(2, '0')),
+                  ],
                 ),
-              ),
-              SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RaisedButton(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                SizedBox(height: 60),
+                Container(
+                  width: 200,
+                  height: 47,
+                  margin: EdgeInsets.only(top: 30),
+                  child: RaisedButton(
+                    color: Colors.green,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    child: Text(isActive ? 'STOP' : 'START'),
                     onPressed: () {
-                      timerStream = stopwatchStream();
-                      timerSubscription = timerStream.listen((int newTick) {
-                        setState(() {
-                          // hoursStr = ((newTick / (60 * 60)) % 60).floor().toString().padLeft(2, '0');
-                          minutesStr = ((newTick / 60) % 60).floor().toString().padLeft(2, '0');
-                          secondsStr = (newTick % 60).floor().toString().padLeft(2,'0');
+                      setState(() {
+                        isActive = !isActive;
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  width: 200,
+                  height: 47,
+                  margin: EdgeInsets.only(top: 30),
+                  child: RaisedButton(
+                    color: Colors.green,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    child: Text('Finish'),
+                    onPressed: isActive ? () {
+                      setState(() {
+                        hasSavedTime = true;
+                        isActive = !isActive;
+                        firestoreInstance.collection('running_times').add({
+                          "email": auth.currentUser.email,
+                          "duration": hours.toString().padLeft(2, '0') + ":" + minutes.toString().padLeft(2, '0') + ":" + seconds.toString().padLeft(2, '0'),
                         });
                       });
-                    },
-                    color: Colors.green,
-                    child: Text(
-                      'START',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
+                    } : null,
                   ),
-                  SizedBox(width: 40.0),
-                  RaisedButton(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                    onPressed: () {
-                      timerSubscription.cancel();
-                      timerStream = null;
-                      setState(() {
-                        // hoursStr = '00';
-                        minutesStr = '00';
-                        secondsStr = '00';
-                      });
-                    },
-                    color: Colors.red,
-                    child: Text(
-                      'RESET',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ),
+        );
+  }
+}
+
+class LabelText extends StatelessWidget {
+  LabelText({this.label, this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.teal,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            '$value',
+            style: TextStyle(
+                color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            '$label',
+            style: TextStyle(
+              color: Colors.white70,
+            ),
+          ),
+        ],
       ),
     );
   }
