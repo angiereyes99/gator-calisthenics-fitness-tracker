@@ -1,2 +1,2 @@
 # gator-calisthenics-fitness-tracker
-CSC642 Individual Project
+CSC642 Final Individual Project.
