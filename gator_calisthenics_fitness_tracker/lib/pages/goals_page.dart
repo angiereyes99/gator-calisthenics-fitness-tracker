@@ -103,7 +103,8 @@ class GoalsPageState extends State<GoalsPage> {
         builder: (context) {
           return new Scaffold(
             appBar: new AppBar(
-              title: new Text('Add a new task')
+              backgroundColor: Colors.green[800],
+              title: new Text('Add a new goal')
             ),
             body: new TextField(
               autofocus: true,

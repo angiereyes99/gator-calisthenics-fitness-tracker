@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/favorites_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/goals_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/running_tracker_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/workouts_page.dart';
 
 
@@ -17,7 +18,17 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
 
   int _currentIndex = 0;
-  final List<Widget> _pages = [ProfilePage(), WorkoutsPage(), GoalsPage(), FavoritesPage()];
+  final List<Widget> _pages = List<Widget>();
+
+  @override
+  void initState() {
+    _pages.add(ProfilePage());
+    _pages.add(WorkoutsPage());
+    _pages.add(GoalsPage());
+    _pages.add(FavoritesPage());
+    _pages.add(RunningTrackerPage());
+    super.initState();
+  }
 
   void onTappedBar(int index) {
     setState(() {
@@ -36,8 +47,9 @@ class _MainNavigationState extends State<MainNavigation> {
         items: [
           Icon(Icons.home, size: 30,),
           Icon(Icons.directions_run, size: 30),
-          Icon(Icons.bookmark, size:30),
+          Icon(Icons.bookmark, size: 30),
           Icon(Icons.star, size: 30,),
+          Icon(Icons.timelapse, size: 30),
         ],
         backgroundColor: Colors.green[200],
       ),
