@@ -45,69 +45,77 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
     int hours = secondsPassed ~/ (60 * 60);
 
     return new Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.green,
-            title: new Text('Timer'),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: new Text('Running Tracker'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    LabelText(
-                        label: 'HRS', value: hours.toString().padLeft(2, '0')),
-                    LabelText(
-                        label: 'MIN',
-                        value: minutes.toString().padLeft(2, '0')),
-                    LabelText(
-                        label: 'SEC',
-                        value: seconds.toString().padLeft(2, '0')),
-                  ],
-                ),
-                SizedBox(height: 60),
-                Container(
-                  width: 200,
-                  height: 47,
-                  margin: EdgeInsets.only(top: 30),
-                  child: RaisedButton(
-                    color: Colors.green,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    child: Text(isActive ? 'STOP' : 'START'),
-                    onPressed: () {
-                      setState(() {
-                        isActive = !isActive;
-                      });
-                    },
-                  ),
-                ),
-                Container(
-                  width: 200,
-                  height: 47,
-                  margin: EdgeInsets.only(top: 30),
-                  child: RaisedButton(
-                    color: Colors.green,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    child: Text('Finish'),
-                    onPressed: isActive ? () {
-                      setState(() {
-                        hasSavedTime = true;
-                        isActive = !isActive;
-                        firestoreInstance.collection('running_times').add({
-                          "email": auth.currentUser.email,
-                          "duration": hours.toString().padLeft(2, '0') + ":" + minutes.toString().padLeft(2, '0') + ":" + seconds.toString().padLeft(2, '0'),
-                        });
-                      });
-                    } : null,
-                  ),
-                )
+                LabelText(
+                    label: 'HRS', value: hours.toString().padLeft(2, '0')),
+                LabelText(
+                    label: 'MIN',
+                    value: minutes.toString().padLeft(2, '0')),
+                LabelText(
+                    label: 'SEC',
+                    value: seconds.toString().padLeft(2, '0')),
               ],
             ),
-          ),
-        );
+            SizedBox(height: 60),
+            Wrap(
+              children: <Widget>[
+                RaisedButton(
+                  color: !isActive ? Colors.green : Colors.red,
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+                  child: Text(isActive ? 'STOP' : 'START'),
+                  onPressed: () {
+                    setState(() {
+                      isActive = !isActive;
+                  });
+                },
+              ),
+              SizedBox(width: 10,),
+              RaisedButton(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+                  child: Text('RESET'),
+                  onPressed: () {
+                    setState(() {
+                      isActive = false;
+                      secondsPassed = 0;
+                  });
+                },
+              ),
+              SizedBox(width: 10,),
+              RaisedButton(
+                color: Colors.green,
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25)),
+                child: Text('Finish'),
+                onPressed: isActive ? () {
+                  setState(() {
+                    hasSavedTime = true;
+                    isActive = !isActive;
+                    firestoreInstance.collection('running_times').add({
+                        "email": auth.currentUser.email,
+                        "duration": hours.toString().padLeft(2, '0') + ":" + minutes.toString().padLeft(2, '0') + ":" + seconds.toString().padLeft(2, '0'),
+                      });
+                    });
+                  } : null,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
