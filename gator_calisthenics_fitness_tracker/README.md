@@ -26,8 +26,8 @@ Full stack iOS mobile application using Flutter, Dart, and Firebase's Cloud Fire
 
 ## Firebase and Firestore
 Data is stored in Firebase's Firestore in real-time through my personal console. <br>
-If you would like to use your own Firebase console to view your data feel free to visit <br>
-[adding Firebase to Flutter here](https://firebase.google.com/docs/flutter/setup). Keep in mind the field names and structures when handling your new database.
+If you would like to use your own Firebase console to view your data feel free to visit
+[adding Firebase to Flutter here](https://firebase.google.com/docs/flutter/setup). <br> Keep in mind the field names and structures when handling your new database.
 
 
 ## Help
