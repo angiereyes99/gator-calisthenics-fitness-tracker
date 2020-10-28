@@ -6,9 +6,9 @@ Full stack iOS mobile application using Flutter, Dart, and Firebase's Cloud Fire
 
 ### Dependencies
 ```
-- [Dart](https://dart.dev/get-dart)
-- [Flutter](https://flutter.dev/docs/get-started/install)
-- [Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
+- [Dart]  https://dart.dev/get-dart)
+- [Flutter] (https://flutter.dev/docs/get-started/install)
+- [Cocoapods] (https://guides.cocoapods.org/using/getting-started.html)
 ```
 
 ### Building and Running Application
