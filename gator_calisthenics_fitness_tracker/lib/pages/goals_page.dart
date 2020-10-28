@@ -48,6 +48,9 @@ class GoalsPageState extends State<GoalsPage> {
                           value: document['has_completed'],
                           onChanged: (newValue) { 
                             collection.doc(document.id).update({'has_completed': newValue});
+                            if (document['has_completed'] == true) {
+                              collection.doc(document.id).delete();
+                            }
                         },
                       );
                     }).toList(),
