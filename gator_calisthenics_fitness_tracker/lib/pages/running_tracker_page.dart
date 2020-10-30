@@ -36,6 +36,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
 
   @override
   Widget build(BuildContext context) {
+
     if (timer == null) {
       timer = Timer.periodic(duration, (Timer t) {
         handleTick();
@@ -44,22 +45,25 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
     int seconds = secondsPassed % 60;
     int minutes = secondsPassed ~/ 60;
     int hours = secondsPassed ~/ (60 * 60);
+    String saved_time = hours.toString().padLeft(2, '0') + 
+                      ":" + minutes.toString().padLeft(2, '0') + 
+                      ":" + seconds.toString().padLeft(2, '0');
 
     return new Scaffold(
-      backgroundColor: primaryBackground,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: new Text('Running Tracker'),
       ),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
+            SizedBox(height: 65,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 LabelText(
-                    label: 'HRS', value: hours.toString().padLeft(2, '0')),
+                    label: 'HRS', value: hours.toString().padLeft(2, '0'),),
                 LabelText(
                     label: 'MIN',
                     value: minutes.toString().padLeft(2, '0')),
@@ -68,7 +72,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                     value: seconds.toString().padLeft(2, '0')),
               ],
             ),
-            SizedBox(height: 60),
+            SizedBox(height: 40),
             Wrap(
               children: <Widget>[
                 RaisedButton(
@@ -107,7 +111,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                     isActive = !isActive;
                     firestoreInstance.collection('running_times').add({
                         "email": auth.currentUser.email,
-                        "duration": hours.toString().padLeft(2, '0') + ":" + minutes.toString().padLeft(2, '0') + ":" + seconds.toString().padLeft(2, '0'),
+                        "duration": saved_time,
                       });
                     });
                   } : null,
@@ -134,7 +138,7 @@ class LabelText extends StatelessWidget {
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: Colors.teal,
+        color: primaryTextColor,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

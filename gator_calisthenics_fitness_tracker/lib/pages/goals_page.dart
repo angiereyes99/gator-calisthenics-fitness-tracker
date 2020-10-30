@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
+import 'package:intl/intl.dart';
 
 class GoalsPage extends StatefulWidget {
 
@@ -13,19 +14,19 @@ class GoalsPage extends StatefulWidget {
 
 class GoalsPageState extends State<GoalsPage> {
 
-  final firestoreInstance = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   final collection = FirebaseFirestore.instance.collection('todos');
   
   List<String> _todoItems = [];
-  bool _isChecked = false;
+
+  String formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.black,
         title: new Text('Set Goals Here')
       ),
       body: Center(
@@ -42,16 +43,24 @@ class GoalsPageState extends State<GoalsPage> {
                 default:
                   return new ListView(
                     children: snapshot.data.docs.map((DocumentSnapshot document) {
-                        return CheckboxListTile(
-                          checkColor: Colors.red,
-                          title: Text(document['todo_item'], style: TextStyle(color: primaryTextColor,),),
-                          value: document['has_completed'],
-                          onChanged: (newValue) { 
-                            collection.doc(document.id).update({'has_completed': newValue});
-                            if (document['has_completed'] == true) {
-                              collection.doc(document.id).delete();
-                            }
-                        },
+                        return Card(
+                          color: primaryTextColor,
+                          child: CheckboxListTile(
+                            checkColor: Colors.black,
+                            title: Text(
+                              document['todo_item'], 
+                              style: TextStyle(color: 
+                              Colors.black,),
+                            ),
+                            subtitle: Text ("Goal created on " + document["datetime"]),
+                            value: document['has_completed'],
+                            onChanged: (newValue) { 
+                              collection.doc(document.id).update({'has_completed': newValue});
+                              if (document['has_completed'] == true) {
+                                collection.doc(document.id).delete();
+                              }
+                          },
+                        )
                       );
                     }).toList(),
                   );
@@ -82,12 +91,14 @@ class GoalsPageState extends State<GoalsPage> {
             ),
             body: new TextField(
               autofocus: true,
+              style: TextStyle(color: Colors.white),
               onSubmitted: (val) {
                 _addTodoItem(val);
                 Navigator.pop(context);
               },
               decoration: new InputDecoration(
                 hintText: 'Enter something to do...',
+                hintStyle: TextStyle(color: Colors.white),
                 contentPadding: const EdgeInsets.all(16.0)
               ),
             )
@@ -99,12 +110,13 @@ class GoalsPageState extends State<GoalsPage> {
 
   void _addTodoItem(String task) {
     if(task.length > 0) {
-    firestoreInstance.collection("todos").add(
+    collection.add(
     {
       "email": auth.currentUser.email,
       "todo_item": task,
       "has_completed": false,
       "is_me": true,
+      "datetime": formattedDate,
     }).then((value){
       print(value.id);
     });
