@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gator_calisthenics_fitness_tracker/models/workouts_model.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 import 'package:intl/intl.dart';
 
@@ -27,7 +28,7 @@ class GoalsPageState extends State<GoalsPage> {
       appBar: new AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        title: new Text('Set Goals Here')
+        title: new Text('Set Your Goals Here!')
       ),
       body: Center(
       child: Container(
@@ -44,7 +45,10 @@ class GoalsPageState extends State<GoalsPage> {
                   return new ListView(
                     children: snapshot.data.docs.map((DocumentSnapshot document) {
                         return Card(
-                          color: primaryTextColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          color: Colors.indigoAccent[100],
                           child: CheckboxListTile(
                             checkColor: Colors.black,
                             title: Text(
@@ -52,7 +56,7 @@ class GoalsPageState extends State<GoalsPage> {
                               style: TextStyle(color: 
                               Colors.black,),
                             ),
-                            subtitle: Text ("Goal created on " + document["datetime"]),
+                            subtitle: Text ("Goal created on: " + document["datetime"]),
                             value: document['has_completed'],
                             onChanged: (newValue) { 
                               collection.doc(document.id).update({'has_completed': newValue});
@@ -69,11 +73,13 @@ class GoalsPageState extends State<GoalsPage> {
           )),
         ),
         floatingActionButton: new FloatingActionButton(
-        backgroundColor: Colors.green[900],
-        onPressed: _pushAddTodoScreen,
+        backgroundColor: primaryTextColor,
+        onPressed: (){
+          print(WorkoutsModel.workouts);
+        },//_pushAddTodoScreen,
         tooltip: 'Add task',
         child: new Icon(
-          Icons.add,
+          Icons.bookmark,
           color: Colors.black,
         )
       ),

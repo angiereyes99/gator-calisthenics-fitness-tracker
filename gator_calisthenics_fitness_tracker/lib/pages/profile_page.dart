@@ -37,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: primaryTextColor),
+                    color: primaryTextColor,),
               ),
               Text(
                 name,
@@ -52,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: primaryTextColor),
+                    color: primaryTextColor,),
               ),
               Text(
                 email,
@@ -67,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
                 },
-                color: Colors.green[900],
+                color: primaryTextColor,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
