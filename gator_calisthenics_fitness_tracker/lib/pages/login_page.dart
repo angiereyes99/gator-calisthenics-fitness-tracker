@@ -18,19 +18,18 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: primaryBackground,
       body: Container(
-        decoration: primaryBackground,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              //Icon(Icons.directions_run, size: 80, color: Colors.white,),
               Image(image: AssetImage("assets/logo.png"), height: 125.0,),
               SizedBox(height: 25,),
               Text(
                 'Gator Calisthenics Fitness Tracker', 
-                style: TextStyle(color: Colors.white, fontSize: 21.5),
+                style: TextStyle(color: primaryTextColor, fontSize: 21.5),
               ),
               SizedBox(height: 50),
               _signInButton(),
@@ -59,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.white,),
+      borderSide: BorderSide(color: primaryTextColor,),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -73,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                 'Sign in with Google',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.white,
+                  color: primaryTextColor,
                 ),
               ),
             )

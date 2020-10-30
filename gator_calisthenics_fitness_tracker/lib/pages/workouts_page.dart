@@ -15,14 +15,14 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: primaryBackground,
       body: Container(
-        decoration: primaryBackground,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Text('This is for workouts page')
+              Text('This is for workouts page', style: TextStyle(color: primaryTextColor),)
             ],
           ),
         ),

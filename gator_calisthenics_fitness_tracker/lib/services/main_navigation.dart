@@ -5,6 +5,7 @@ import 'package:gator_calisthenics_fitness_tracker/pages/goals_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/running_tracker_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/workouts_page.dart';
+import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 
 class MainNavigation extends StatefulWidget {
@@ -43,15 +44,15 @@ class _MainNavigationState extends State<MainNavigation> {
       bottomNavigationBar: CurvedNavigationBar(
         index: _currentIndex,
         onTap: onTappedBar,
-        color: Colors.green[800],
+        color: primaryBackground,
         items: [
-          Icon(Icons.home, size: 30,),
-          Icon(Icons.directions_run, size: 30),
-          Icon(Icons.bookmark, size: 30),
-          Icon(Icons.star, size: 30,),
-          Icon(Icons.timelapse, size: 30),
+          Icon(Icons.home, size: 30, color: primaryTextColor,),
+          Icon(Icons.directions_run, size: 30, color: primaryTextColor,),
+          Icon(Icons.bookmark, size: 30, color: primaryTextColor,),
+          Icon(Icons.star, size: 30, color: primaryTextColor,),
+          Icon(Icons.timelapse, size: 30, color: primaryTextColor,),
         ],
-        backgroundColor: Colors.green[200],
+        backgroundColor: Colors.black,
       ),
     );
   }

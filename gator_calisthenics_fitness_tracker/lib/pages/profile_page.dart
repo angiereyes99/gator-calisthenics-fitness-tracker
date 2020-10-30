@@ -19,7 +19,6 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: primaryBackground,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -38,13 +37,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black54),
+                    color: primaryTextColor),
               ),
               Text(
                 name,
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.white,
+                    color: primaryTextColor,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
@@ -53,13 +52,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black54),
+                    color: primaryTextColor),
               ),
               Text(
                 email,
                 style: TextStyle(
                     fontSize: 25,
-                    color: Colors.white,
+                    color: primaryTextColor,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
@@ -73,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Sign Out',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
+                    style: TextStyle(fontSize: 25, color: Colors.black),
                   ),
                 ),
                 elevation: 5,

@@ -15,8 +15,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: primaryBackground,
       body: Container(
-        decoration: primaryBackground,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

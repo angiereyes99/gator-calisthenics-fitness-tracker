@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 
 class RunningTrackerPage extends StatefulWidget {
@@ -45,8 +46,9 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
     int hours = secondsPassed ~/ (60 * 60);
 
     return new Scaffold(
+      backgroundColor: primaryBackground,
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.transparent,
         title: new Text('Running Tracker'),
       ),
       body: Center(

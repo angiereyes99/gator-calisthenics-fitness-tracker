@@ -30,7 +30,6 @@ class GoalsPageState extends State<GoalsPage> {
       ),
       body: Center(
       child: Container(
-        decoration: primaryBackground,
         padding: const EdgeInsets.all(10.0),
         child: StreamBuilder<QuerySnapshot>(
           stream: collection.snapshots(),
@@ -44,7 +43,8 @@ class GoalsPageState extends State<GoalsPage> {
                   return new ListView(
                     children: snapshot.data.docs.map((DocumentSnapshot document) {
                         return CheckboxListTile(
-                          title: Text(document['todo_item']),
+                          checkColor: Colors.red,
+                          title: Text(document['todo_item'], style: TextStyle(color: primaryTextColor,),),
                           value: document['has_completed'],
                           onChanged: (newValue) { 
                             collection.doc(document.id).update({'has_completed': newValue});
