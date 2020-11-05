@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 
@@ -15,6 +16,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: isDarkMode ? primaryBackground : Colors.white,
       appBar: new AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,

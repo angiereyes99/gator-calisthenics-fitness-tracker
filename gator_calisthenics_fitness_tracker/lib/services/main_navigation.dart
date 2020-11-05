@@ -44,7 +44,7 @@ class _MainNavigationState extends State<MainNavigation> {
       bottomNavigationBar: CurvedNavigationBar(
         index: _currentIndex,
         onTap: onTappedBar,
-        color: primaryBackground,
+        color: navbarColor,
         items: [
           Icon(Icons.home, size: 30, color: Colors.white,),
           Icon(Icons.directions_run, size: 30, color: Colors.white,),

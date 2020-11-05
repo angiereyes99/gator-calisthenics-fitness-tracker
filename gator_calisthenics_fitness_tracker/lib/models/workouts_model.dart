@@ -6,11 +6,16 @@ import 'package:flutter/material.dart';
 
 class WorkoutsModel {
 
-  static List<List<String>> workouts = [
-    ['Push-ups', 'https://gmb.io/push-up/'],
-    ['Pull-ups', 'https://www.menshealth.com/fitness/a27559651/pullups-guide/'],
-    ['Running', 'https://www.menshealth.com/fitness/a27559651/pullups-guide/'],
-    ['Planch Push-ups', 'https://www.menshealth.com/fitness/a27559651/pullups-guide/']
+  static List<String> workouts = [
+    'Push-ups',
+    'Pull-ups',
+    'Running',
+    'Planch Push-ups',
+    'Sit-ups',
+    'V-Ups',
+    'Planks',
+    'Chin-ups',
+    'One-arm Push-ups'
   ];
 
 }

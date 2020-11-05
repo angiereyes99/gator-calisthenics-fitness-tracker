@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gator_calisthenics_fitness_tracker/models/theme_model.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/login_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/workouts_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/google_signing_service.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
+bool isDarkMode = true;
 
 class ProfilePage extends StatefulWidget {
 
@@ -15,9 +17,16 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
+  ThemeModel selected;
+  List<ThemeModel> lightingItems = <ThemeModel>[
+    const ThemeModel('Dark Mode', Icon(Icons.wb_cloudy, color: Colors.orange,)),
+    const ThemeModel('Light Mode', Icon(Icons.wb_sunny, color: Colors.orange,))
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: isDarkMode ? primaryBackground : Colors.white,
       body: Container(
         child: Center(
           child: Column(
@@ -62,6 +71,48 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
+              DropdownButton<ThemeModel>(
+                hint: Text(
+                  'Select Theme',
+                  style: TextStyle(
+                      color: isDarkMode ? Colors.black : Colors.black,
+                      fontSize: 25,
+                    ),
+                  ),
+                value: selected,
+                onChanged: (ThemeModel value) {
+                  setState(() {
+                    selected = value;
+                    print('LOL');
+                  });
+                },
+                items: lightingItems.map((ThemeModel lightingItem){
+                  return DropdownMenuItem<ThemeModel>(
+                    onTap: () {
+                      if (lightingItem.type != 'Dark Mode') {
+                        isDarkMode = false;
+                      } else {
+                        isDarkMode = true;
+                      }
+                    },
+                    value: lightingItem,
+                    child: Row(
+                      children: <Widget>[
+                        lightingItem.icon,
+                        SizedBox(width: 10),
+                        Text(
+                          lightingItem.type,
+                          style: TextStyle(
+                            color: isDarkMode ? Colors.white : Colors.black,
+                            fontSize: 30,
+                            //fontFamily: font,
+                            ),
+                        )
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
               RaisedButton(
                 onPressed: () {
                   signOutGoogle();

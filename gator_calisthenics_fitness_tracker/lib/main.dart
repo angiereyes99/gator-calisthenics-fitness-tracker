@@ -16,7 +16,10 @@ class GatorCalisthenics extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: new ThemeData(scaffoldBackgroundColor: Colors.black, unselectedWidgetColor: Colors.white,),
+      theme: new ThemeData(
+        scaffoldBackgroundColor: Colors.black, 
+        unselectedWidgetColor: Colors.white,
+      ),
       initialRoute: LoginPage.id,
       routes: {
         LoginPage.id: (context) => LoginPage(),

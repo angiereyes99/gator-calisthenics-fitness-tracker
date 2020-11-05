@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 
 
-const primaryBackground = const Color(0x1FFFFFFF);
+const primaryBackground = const Color(0xFF000000);
+const primaryBackgroundLight = const Color(0xFFFFFFFF);
 const primaryTextColor = const Color(0xFF76FF03);
+const navbarColor = const Color(0x1FFFFFFF);
 
 /** UNUSED VARIABLES **/
 const Color gradientStart = const Color(0xFFC8E6C9);

@@ -15,7 +15,7 @@ class RunningTrackerPage extends StatefulWidget {
 
 class _RunningTrackerStatePage extends State<RunningTrackerPage> {
 
-  final firestoreInstance = FirebaseFirestore.instance;
+  final collection = FirebaseFirestore.instance.collection('running_times');
   final FirebaseAuth auth = FirebaseAuth.instance;
   //final collection = FirebaseFirestore.instance.collection('todos');
 
@@ -51,7 +51,6 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                       ":" + seconds.toString().padLeft(2, '0');
 
     return new Scaffold(
-      //resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: new Text('Running Tracker'),
@@ -111,9 +110,10 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                   setState(() {
                     hasSavedTime = true;
                     isActive = !isActive;
-                    firestoreInstance.collection('running_times').add({
+                    collection.add({
                         "email": auth.currentUser.email,
                         "duration": saved_time,
+                        'has_completed': false,
                       });
                     });
                   } : null,

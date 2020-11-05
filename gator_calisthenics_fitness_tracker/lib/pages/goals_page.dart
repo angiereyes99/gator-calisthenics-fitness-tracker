@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/models/workouts_model.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 import 'package:intl/intl.dart';
 
@@ -26,10 +27,17 @@ class GoalsPageState extends State<GoalsPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.black,
-        title: new Text('Set Your Goals Here!'),
+        backgroundColor: isDarkMode ? Colors.black : primaryBackgroundLight,
+        elevation: 0,
+        title: new Text(
+        'Set Your Goals Here!',
+        style: TextStyle(
+          color: isDarkMode ? Colors.white : Colors.black,
+        ),
+        ),
       ),
       body: Center(
       child: Container(
@@ -75,7 +83,7 @@ class GoalsPageState extends State<GoalsPage> {
           )),
         ),
         floatingActionButton: new FloatingActionButton(
-        backgroundColor: primaryTextColor,
+        backgroundColor: Colors.white,
         onPressed: (){
           print(WorkoutsModel.workouts);
           _pushAddTodoScreen();
