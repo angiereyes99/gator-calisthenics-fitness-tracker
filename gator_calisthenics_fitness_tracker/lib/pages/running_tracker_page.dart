@@ -17,6 +17,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
 
   final firestoreInstance = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
+  //final collection = FirebaseFirestore.instance.collection('todos');
 
   static const duration = const Duration(seconds: 1);
 
@@ -50,11 +51,12 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                       ":" + seconds.toString().padLeft(2, '0');
 
     return new Scaffold(
+      //resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: new Text('Running Tracker'),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[

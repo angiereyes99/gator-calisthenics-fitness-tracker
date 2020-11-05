@@ -19,6 +19,7 @@ class GoalsPageState extends State<GoalsPage> {
   final collection = FirebaseFirestore.instance.collection('todos');
   
   List<String> _todoItems = [];
+  bool test = false;
 
   String formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(DateTime.now());
 
@@ -28,7 +29,7 @@ class GoalsPageState extends State<GoalsPage> {
       appBar: new AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
-        title: new Text('Set Your Goals Here!')
+        title: new Text('Set Your Goals Here!'),
       ),
       body: Center(
       child: Container(
@@ -48,7 +49,8 @@ class GoalsPageState extends State<GoalsPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          color: Colors.indigoAccent[100],
+                          elevation: 0,
+                          color: primaryTextColor,
                           child: CheckboxListTile(
                             checkColor: Colors.black,
                             title: Text(
@@ -58,7 +60,7 @@ class GoalsPageState extends State<GoalsPage> {
                             ),
                             subtitle: Text ("Goal created on: " + document["datetime"]),
                             value: document['has_completed'],
-                            onChanged: (newValue) { 
+                            onChanged: (newValue) {
                               collection.doc(document.id).update({'has_completed': newValue});
                               if (document['has_completed'] == true) {
                                 collection.doc(document.id).delete();
@@ -76,7 +78,8 @@ class GoalsPageState extends State<GoalsPage> {
         backgroundColor: primaryTextColor,
         onPressed: (){
           print(WorkoutsModel.workouts);
-        },//_pushAddTodoScreen,
+          _pushAddTodoScreen();
+        },
         tooltip: 'Add task',
         child: new Icon(
           Icons.bookmark,
@@ -126,8 +129,45 @@ class GoalsPageState extends State<GoalsPage> {
     }).then((value){
       print(value.id);
     });
+      collection.orderBy('date', descending: true);
       setState(() => _todoItems.add(task));
     }
+  }
+
+  bool confirmCompletedDialogue(bool test) {
+
+    Widget confirmButton =  FlatButton(
+      child: Text('Achieved!'),
+      onPressed: (){
+        test = true;
+        print(test);
+        Navigator.pop(context);
+      },
+    );
+
+    Widget cancelButton = FlatButton(
+      child: Text('Cancel'),
+      onPressed: (){
+        test = false;
+        print(test);
+        Navigator.pop(context);
+      },
+    );
+
+    AlertDialog confirm = AlertDialog(
+      title: Text('Did you achieve this goal?'),
+      content: Text('Setting goals is the best way to keep yourself accountable!'),
+      actions: [confirmButton, cancelButton],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return confirm;
+      },
+    );
+
+    return test;
   }
 
   Widget _buildTodoList() {

@@ -15,7 +15,11 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: primaryBackground,
+      appBar: new AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black,
+        title: new Text('Keep track of your workouts!'),
+      ),
       body: Container(
         child: Center(
           child: Column(
@@ -26,6 +30,17 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: new FloatingActionButton(
+        backgroundColor: primaryTextColor,
+        onPressed: (){
+          //print(WorkoutsModel.workouts);
+        },//_pushAddTodoScreen,
+        tooltip: 'Add task',
+        child: new Icon(
+          Icons.add,
+          color: Colors.white,
+        )
       ),
     );
   }
