@@ -20,6 +20,8 @@ Full stack iOS mobile application using Flutter, Dart, and Firebase's Cloud Fire
 
 - pod setup
 
+- flutter pub get
+
 - open iOS simulator (iOS 9 or above)
 
 - run 'F5' or inside terminal 'flutter run'
