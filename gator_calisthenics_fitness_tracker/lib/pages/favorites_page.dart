@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/models/workouts_model.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 class FavoritesPage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
     style: TextStyle(
       //fontFamily: font,
       fontSize: 16.0,
-      color: Colors.white,
+      color: isDarkMode ? primaryBackgroundLight : primaryBackground,
     ),
   );
 
@@ -53,6 +54,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
       appBar: new AppBar(
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
@@ -73,12 +75,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     decoration: InputDecoration(
                       hintText: 'Search for workouts here...',
                       hintStyle: TextStyle(
-                        color: Colors.white70,
+                        color: isDarkMode ? Colors.white70 : primaryBackground,
                       ),
                       suffixIcon: IconButton(
                         icon: Icon(
                           Icons.cancel,
-                          color: primaryTextColor,//buttonColorDark,
+                          color: primaryTextColor,
                         ),
                         onPressed: () {
                           _textController.clear();
@@ -103,9 +105,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   this.cusSearchBar = Text(
                     'List down your favorite exercises!',
                     style: TextStyle(
-                      //fontFamily: font,
                       fontSize: 16.0,
-                      color: Colors.white,
+                      color: isDarkMode ? primaryBackgroundLight : primaryBackground,
                     ),
                   );
                 }
@@ -148,7 +149,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                     fontSize: 18.0,
                                     //fontFamily: font,
                                     fontWeight: FontWeight.w400,
-                                    color: Colors.white,
+                                    color: isDarkMode ? primaryBackgroundLight : primaryBackground,
                                   ),
                                 ),
                               ],

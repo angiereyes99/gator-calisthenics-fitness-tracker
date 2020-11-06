@@ -44,15 +44,15 @@ class _MainNavigationState extends State<MainNavigation> {
       bottomNavigationBar: CurvedNavigationBar(
         index: _currentIndex,
         onTap: onTappedBar,
-        color: navbarColor,
+        color: primaryTextColor,
         items: [
-          Icon(Icons.home, size: 30, color: Colors.white,),
-          Icon(Icons.directions_run, size: 30, color: Colors.white,),
-          Icon(Icons.bookmark, size: 30, color: Colors.white,),
-          Icon(Icons.star, size: 30, color: Colors.white,),
-          Icon(Icons.timelapse, size: 30, color: Colors.white,),
+          Icon(Icons.home, size: 30, color: Colors.white),
+          Icon(Icons.directions_run, size: 30, color: Colors.white),
+          Icon(Icons.bookmark, size: 30, color: Colors.white),
+          Icon(Icons.star, size: 30, color: Colors.white),
+          Icon(Icons.timelapse, size: 30, color: Colors.white),
         ],
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
       ),
     );
   }

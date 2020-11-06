@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
 
@@ -51,9 +52,14 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                       ":" + seconds.toString().padLeft(2, '0');
 
     return new Scaffold(
+      backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: new Text('Running Tracker'),
+        backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
+        elevation: 0.0,
+        title: new Text(
+          'Running Tracker',
+          style: TextStyle(color: isDarkMode ? primaryBackgroundLight : primaryBackground),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

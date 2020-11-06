@@ -8,7 +8,6 @@ import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 bool isDarkMode = true;
 
 class ProfilePage extends StatefulWidget {
-
   static final String id = 'profile_page';
 
   @override
@@ -16,11 +15,20 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   ThemeModel selected;
   List<ThemeModel> lightingItems = <ThemeModel>[
-    const ThemeModel('Dark Mode', Icon(Icons.wb_cloudy, color: Colors.orange,)),
-    const ThemeModel('Light Mode', Icon(Icons.wb_sunny, color: Colors.orange,))
+    const ThemeModel(
+        'Dark Mode',
+        Icon(
+          Icons.wb_cloudy,
+          color: Colors.orange,
+        )),
+    const ThemeModel(
+        'Light Mode',
+        Icon(
+          Icons.wb_sunny,
+          color: Colors.orange,
+        ))
   ];
 
   @override
@@ -44,9 +52,10 @@ class _ProfilePageState extends State<ProfilePage> {
               Text(
                 'NAME',
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: primaryTextColor,),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: primaryTextColor,
+                ),
               ),
               Text(
                 name,
@@ -59,9 +68,10 @@ class _ProfilePageState extends State<ProfilePage> {
               Text(
                 'EMAIL',
                 style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: primaryTextColor,),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: primaryTextColor,
+                ),
               ),
               Text(
                 email,
@@ -75,18 +85,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 hint: Text(
                   'Select Theme',
                   style: TextStyle(
-                      color: isDarkMode ? Colors.black : Colors.black,
-                      fontSize: 25,
-                    ),
+                    color: isDarkMode ? Colors.white : Colors.black,
+                    fontSize: 25,
                   ),
+                ),
                 value: selected,
                 onChanged: (ThemeModel value) {
                   setState(() {
                     selected = value;
-                    print('LOL');
                   });
                 },
-                items: lightingItems.map((ThemeModel lightingItem){
+                items: lightingItems.map((ThemeModel lightingItem) {
                   return DropdownMenuItem<ThemeModel>(
                     onTap: () {
                       if (lightingItem.type != 'Dark Mode') {
@@ -103,20 +112,24 @@ class _ProfilePageState extends State<ProfilePage> {
                         Text(
                           lightingItem.type,
                           style: TextStyle(
-                            color: isDarkMode ? Colors.white : Colors.black,
+                            color: primaryTextColor,
                             fontSize: 30,
                             //fontFamily: font,
-                            ),
+                          ),
                         )
                       ],
                     ),
                   );
                 }).toList(),
               ),
+              SizedBox(height: 40,),
               RaisedButton(
                 onPressed: () {
                   signOutGoogle();
-                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) {
+                    return LoginPage();
+                  }), ModalRoute.withName('/'));
                 },
                 color: primaryTextColor,
                 child: Padding(
