@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
-import 'package:gator_calisthenics_fitness_tracker/pages/workouts_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/google_signing_service.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/main_navigation.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';

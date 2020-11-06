@@ -165,7 +165,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: collection.snapshots(),
+                  stream: collection.where('email', isEqualTo: auth.currentUser.email).snapshots(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasError)
                         return new Text('Error: ${snapshot.error}');
@@ -179,8 +179,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                         ),
-                        elevation: 0,
-                        color: primaryTextColor,
+                        elevation: 15.0,
+                        color: isDarkMode ? primaryTextColor : primaryBackgroundLight,
                         child: ListTile(
                           title: InkWell(
                             child: RichText(
@@ -202,7 +202,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   ]),
                               ),
                           ),
-                        trailing: Icon(Icons.more_vert),
+                        trailing: Icon(Icons.more_vert, color: primaryTextColor),
                       )
                     );
                   }).toList(),

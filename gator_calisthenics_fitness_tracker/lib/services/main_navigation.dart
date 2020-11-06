@@ -52,7 +52,7 @@ class _MainNavigationState extends State<MainNavigation> {
           Icon(Icons.star, size: 30, color: Colors.white),
           Icon(Icons.timelapse, size: 30, color: Colors.white),
         ],
-        backgroundColor: Colors.transparent,
+        backgroundColor: isDarkMode ? primaryBackground : Colors.white,
       ),
     );
   }

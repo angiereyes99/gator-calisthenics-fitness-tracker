@@ -41,7 +41,7 @@ class GoalsPageState extends State<GoalsPage> {
         child: Container(
             padding: const EdgeInsets.all(32.0),
             child: StreamBuilder<QuerySnapshot>(
-              stream: collection.snapshots(),
+              stream: collection.where('email', isEqualTo: auth.currentUser.email).snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError)
@@ -57,8 +57,8 @@ class GoalsPageState extends State<GoalsPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
-                            elevation: 0,
-                            color: primaryTextColor,
+                            elevation: 15,
+                            color: isDarkMode ? primaryTextColor : Colors.white,
                             child: CheckboxListTile(
                               checkColor: Colors.black,
                               title: Text(
