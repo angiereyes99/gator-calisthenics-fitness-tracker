@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 25,),
               Text(
                 'Gator Calisthenics Fitness Tracker', 
-                style: TextStyle(color: primaryTextColor, fontSize: 21.5),
+                style: TextStyle(color: primaryTextColor, fontSize: 21.5, fontFamily: font),
               ),
               SizedBox(height: 50),
               _signInButton(),

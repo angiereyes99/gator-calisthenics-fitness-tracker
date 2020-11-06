@@ -31,9 +31,11 @@ class GoalsPageState extends State<GoalsPage> {
         backgroundColor: isDarkMode ? Colors.black : primaryBackgroundLight,
         elevation: 0,
         title: new Text(
-          'Set Your Goals Here!',
+          'Set Your Fitness Goals Here!',
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
+            fontFamily: font,
+            fontSize: 30
           ),
         ),
       ),
@@ -43,44 +45,50 @@ class GoalsPageState extends State<GoalsPage> {
             child: StreamBuilder<QuerySnapshot>(
               stream: collection.where('email', isEqualTo: auth.currentUser.email).snapshots(),
               builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError)
-                  return new Text('Error: ${snapshot.error}');
-                switch (snapshot.connectionState) {
-                  case ConnectionState.waiting:
-                    return new Text('Loading...');
-                  default:
-                    return new ListView(
-                      children:
-                          snapshot.data.docs.map((DocumentSnapshot document) {
-                        return Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            elevation: 15,
-                            color: isDarkMode ? primaryTextColor : Colors.white,
-                            child: CheckboxListTile(
-                              checkColor: Colors.black,
-                              title: Text(
-                                document['todo_item'],
-                                style: TextStyle(
-                                  color: Colors.black,
-                                ),
+              AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError)
+                return new Text('Error: ${snapshot.error}');
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return new Text('Loading...');
+                default:
+                  return new ListView(
+                    children:
+                        snapshot.data.docs.map((DocumentSnapshot document) {
+                      return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          elevation: 15,
+                          color: isDarkMode ? primaryTextColor : Colors.white,
+                          child: CheckboxListTile(
+                            checkColor: Colors.black,
+                            title: Text(
+                              document['todo_item'],
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontFamily: font,
                               ),
-                              subtitle: Text(
-                                  "Goal created on: " + document["datetime"]),
-                              value: document['has_completed'],
-                              onChanged: (newValue) {
-                                collection
-                                    .doc(document.id)
-                                    .update({'has_completed': newValue});
-                                if (document['has_completed'] == true) {
-                                  collection.doc(document.id).delete();
-                                }
-                              },
-                            ));
-                      }).toList(),
-                    );
+                            ),
+                            subtitle: Text(
+                              "Goal created on: " + document["datetime"],
+                              style: TextStyle(
+                                fontFamily: font,
+                              ),
+                            ),
+                            value: document['has_completed'],
+                            onChanged: (newValue) {
+                              collection
+                                  .doc(document.id)
+                                  .update({'has_completed': newValue});
+                              if (document['has_completed'] == true) {
+                                collection.doc(document.id).delete();
+                              }
+                            },
+                          ));
+                    }).toList(),
+                  );
                 }
               },
             )),

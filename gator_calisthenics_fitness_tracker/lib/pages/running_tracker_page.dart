@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
-
 class RunningTrackerPage extends StatefulWidget {
-
   static final String id = 'running_tracker_id';
 
   @override
@@ -15,10 +13,8 @@ class RunningTrackerPage extends StatefulWidget {
 }
 
 class _RunningTrackerStatePage extends State<RunningTrackerPage> {
-
   final collection = FirebaseFirestore.instance.collection('running_times');
   final FirebaseAuth auth = FirebaseAuth.instance;
-  //final collection = FirebaseFirestore.instance.collection('todos');
 
   static const duration = const Duration(seconds: 1);
 
@@ -38,7 +34,6 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
 
   @override
   Widget build(BuildContext context) {
-
     if (timer == null) {
       timer = Timer.periodic(duration, (Timer t) {
         handleTick();
@@ -47,36 +42,42 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
     int seconds = secondsPassed % 60;
     int minutes = secondsPassed ~/ 60;
     int hours = secondsPassed ~/ (60 * 60);
-    String saved_time = hours.toString().padLeft(2, '0') + 
-                      ":" + minutes.toString().padLeft(2, '0') + 
-                      ":" + seconds.toString().padLeft(2, '0');
+    String savedTime = hours.toString().padLeft(2, '0') +
+        ":" +
+        minutes.toString().padLeft(2, '0') +
+        ":" +
+        seconds.toString().padLeft(2, '0');
 
     return new Scaffold(
       backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
       appBar: AppBar(
-        backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
+        backgroundColor:
+            isDarkMode ? primaryBackground : primaryBackgroundLight,
         elevation: 0.0,
         title: new Text(
           'Running Tracker',
-          style: TextStyle(color: isDarkMode ? primaryBackgroundLight : primaryBackground),
+          style: TextStyle(
+              color: isDarkMode ? primaryBackgroundLight : primaryBackground),
         ),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            SizedBox(height: 65,),
+            SizedBox(
+              height: 65,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 LabelText(
-                    label: 'HRS', value: hours.toString().padLeft(2, '0'),),
+                  label: 'HRS',
+                  value: hours.toString().padLeft(2, '0'),
+                ),
                 LabelText(
-                    label: 'MIN',
-                    value: minutes.toString().padLeft(2, '0')),
+                    label: 'MIN', value: minutes.toString().padLeft(2, '0')),
                 LabelText(
-                    label: 'SEC',
-                    value: seconds.toString().padLeft(2, '0')),
+                    label: 'SEC', value: seconds.toString().padLeft(2, '0')),
               ],
             ),
             SizedBox(height: 40),
@@ -85,44 +86,50 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                 RaisedButton(
                   color: !isActive ? Colors.green : Colors.red,
                   shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
+                      borderRadius: BorderRadius.circular(25)),
                   child: Text(isActive ? 'STOP' : 'START'),
                   onPressed: () {
                     setState(() {
                       isActive = !isActive;
-                  });
-                },
-              ),
-              SizedBox(width: 10,),
-              RaisedButton(
+                    });
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                RaisedButton(
                   color: Colors.green,
                   shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
+                      borderRadius: BorderRadius.circular(25)),
                   child: Text('RESET'),
                   onPressed: () {
                     setState(() {
                       isActive = false;
                       secondsPassed = 0;
-                  });
-                },
-              ),
-              SizedBox(width: 10,),
-              RaisedButton(
-                color: Colors.green,
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25)),
-                child: Text('Finish'),
-                onPressed: isActive ? () {
-                  setState(() {
-                    hasSavedTime = true;
-                    isActive = !isActive;
-                    collection.add({
-                        "email": auth.currentUser.email,
-                        "duration": saved_time,
-                        'has_completed': false,
-                      });
                     });
-                  } : null,
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                RaisedButton(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Text('Finish'),
+                  onPressed: isActive
+                      ? () {
+                          setState(() {
+                            hasSavedTime = true;
+                            isActive = !isActive;
+                            collection.add({
+                              "email": auth.currentUser.email,
+                              "duration": savedTime,
+                              'has_completed': false,
+                            });
+                          });
+                        }
+                      : null,
                 ),
               ],
             ),

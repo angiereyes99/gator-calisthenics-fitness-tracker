@@ -25,6 +25,11 @@ dev_dependencies:
 
 flutter:
 
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: fonts/UbuntuCondensed-Regular.ttf
+
   uses-material-design: true
 
   assets:

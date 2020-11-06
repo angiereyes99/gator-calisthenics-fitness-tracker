@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 
-
 const primaryBackground = const Color(0xFF000000);
 const primaryBackgroundLight = const Color(0xFFFFFFFF);
 const primaryTextColor = const Color(0xFF66BB6A);
 const navbarColor = const Color(0x1FFFFFFF);
+const font = 'Ubuntu';
 
 /** UNUSED VARIABLES **/
 const Color gradientStart = const Color(0xFFC8E6C9);

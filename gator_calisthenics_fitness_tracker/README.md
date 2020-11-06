@@ -27,6 +27,31 @@ Full stack iOS mobile application using Flutter, Dart, and Firebase's Cloud Fire
 - run 'F5' or inside terminal 'flutter run'
 ```
 
+### Application Structure
+```bash
+.
+├── lib
+│    ├── models
+│    │      ├── theme_model.dart
+│    │      └── workouts_model.dart
+│    ├── pages
+│    │      ├── login_page.dart
+│    │      ├── profile_page.dart
+│    │      ├── workouts_page.dart
+│    │      ├── goals_page.dart
+│    │      ├── favorites_page.dart
+│    │      └── running_tracker_page.dart
+│    │
+│    ├── services
+│    │      ├── google_signin_service.dart
+│    │      └── main_navigation.dart
+│    │
+│    ├── utils
+│    │      └── constants.dart
+│    ├── main.dart
+└── README.md
+```
+
 ## Firebase and Firestore
 Data is stored in Firebase's Firestore in real-time through my personal console. <br>
 If you would like to use your own Firebase console to view your data feel free to visit

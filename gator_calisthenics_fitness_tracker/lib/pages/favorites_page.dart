@@ -76,6 +76,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       hintText: 'Search for workouts here...',
                       hintStyle: TextStyle(
                         color: isDarkMode ? Colors.white70 : primaryBackground,
+                        fontFamily: font,
                       ),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -105,7 +106,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   this.cusSearchBar = Text(
                     'List down your favorite exercises!',
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontFamily: font,
                       color: isDarkMode ? primaryBackgroundLight : primaryBackground,
                     ),
                   );
@@ -147,7 +148,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   text: ' ${newList[index]} ',
                                   style: TextStyle(
                                     fontSize: 18.0,
-                                    //fontFamily: font,
+                                    fontFamily: font,
                                     fontWeight: FontWeight.w400,
                                     color: isDarkMode ? primaryBackgroundLight : primaryBackground,
                                   ),
@@ -202,7 +203,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   ]),
                               ),
                           ),
-                        trailing: Icon(Icons.more_vert, color: primaryTextColor),
+                        trailing: Icon(Icons.more_vert, color: primaryBackground),
                       )
                     );
                   }).toList(),
