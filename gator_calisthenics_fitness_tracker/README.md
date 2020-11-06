@@ -57,6 +57,28 @@ Data is stored in Firebase's Firestore in real-time through my personal console.
 If you would like to use your own Firebase console to view your data feel free to visit
 [adding Firebase to Flutter here](https://firebase.google.com/docs/flutter/setup). <br> Keep in mind the field names and structures when handling your new database.
 
+## Firestore Structure
+```bash
+.
+├── 'todos':
+│       ├── 'email': string
+│       ├── 'todo_item': string
+│       ├── 'is_me':  boolean
+│       ├── 'has_completed': boolean
+│       └── 'datetime': datetime
+│ 
+├── 'favorites':
+│       ├── 'email': string
+│       ├── 'workout': string
+│       ├── 'is_favorite':  boolean
+│       └── 'datetime': datetime
+│
+├── 'running_times':
+│       ├── 'email': string
+│       ├── 'duration': string
+│       └── 'has_completed': boolean
+
+```
 
 ## Help
 For help getting started with Flutter, view the
