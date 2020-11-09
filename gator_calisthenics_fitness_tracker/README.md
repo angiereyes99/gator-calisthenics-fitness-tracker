@@ -2,6 +2,11 @@
 
 Full stack iOS mobile application using Flutter, Dart, and Firebase's Cloud Firestore.
 
+## Special Thanks
+
+Thank you Rebecca Zumaeta for designing an amazing app logo! <br>
+Feel free to check her our on her github: [rezum](https://github.com/rezum)
+
 ## How To Run Application
 
 ### Dependencies
@@ -79,13 +84,6 @@ If you would like to use your own Firebase console to view your data feel free t
 │       └── 'has_completed': boolean
 
 ```
-
-## Special Thanks
-
-Thank you Rebecca Zumaeta for designing an amazing app logo! <br>
-Feel free to check her our on her github: [rezum](https://github.com/rezum)
-
-![homelogo](https://user-images.githubusercontent.com/48266187/98595598-08e5ab80-228b-11eb-8048-1a4d149afc02.PNG){ width=50% }
 
 ## Help
 For help getting started with Flutter, view the
