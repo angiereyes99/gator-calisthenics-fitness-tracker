@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_particles/particles.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/about_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/google_signing_service.dart';
 import 'package:gator_calisthenics_fitness_tracker/services/main_navigation.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
@@ -49,6 +50,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 50,),
                 _signInButton(),
+                SizedBox(height: 25,),
+                _aboutLink(),
               ],
             )
           ),
@@ -56,32 +59,10 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: Container(
-  //       child: Center(
-  //         child: Column(
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           children: <Widget>[
-  //             Particles(20, primaryTextColor),
-  //             Image(image: AssetImage("assets/homelogo.PNG"), height: 180.0,),
-  //             SizedBox(height: 25,),
-  //             Text(
-  //               'Gator Calisthenics Fitness Tracker', 
-  //               style: TextStyle(color: primaryTextColor, fontSize: 26.5, fontFamily: font),
-  //             ),
-  //             SizedBox(height: 50),
-  //             _signInButton(),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
 
   Widget _signInButton() {
-    return OutlineButton(
-      splashColor: Colors.white,
+    return MaterialButton(
+      color: primaryBackgroundLight,
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
@@ -96,8 +77,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: primaryTextColor,),
+      elevation: 15.0,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -108,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                'Sign in with Google',
+                '| Sign in with Google',
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: font,
@@ -118,6 +98,17 @@ class _LoginPageState extends State<LoginPage> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _aboutLink() {
+    return Text(
+      'About',
+      style: TextStyle(
+        color: primaryTextColor,
+        fontFamily: font,
+        fontSize: 20
       ),
     );
   }

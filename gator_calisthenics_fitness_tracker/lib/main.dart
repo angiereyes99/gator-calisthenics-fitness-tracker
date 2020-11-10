@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gator_calisthenics_fitness_tracker/pages/about_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/favorites_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/goals_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/login_page.dart';
@@ -28,6 +29,7 @@ class GatorCalisthenics extends StatelessWidget {
         GoalsPage.id: (context) => GoalsPage(),
         FavoritesPage.id: (context) => FavoritesPage(),
         RunningTrackerPage.id: (context) => RunningTrackerPage(),
+        AboutPage.id: (context) => AboutPage(),
       },
     );
   }
