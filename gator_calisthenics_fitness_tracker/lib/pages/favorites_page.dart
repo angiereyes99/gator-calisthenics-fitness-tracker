@@ -39,7 +39,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
 
   onItemChanged(String value) {
     setState(() {
-      newList = workoutsList
+      newList = workoutsList.toSet()
           .where((string) => string.toLowerCase().contains(value.toLowerCase()))
           .toList();
       if (value == '') {
@@ -61,6 +61,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         actions: <Widget>[
           IconButton(
             onPressed: () {
+              print(WorkoutsModel.workouts);
               setState(() {
                 if (this.searchIcon.icon == Icons.search) {
                   this.searchIcon = Icon(

@@ -103,13 +103,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _aboutLink() {
-    return Text(
-      'About',
-      style: TextStyle(
-        color: primaryTextColor,
-        fontFamily: font,
-        fontSize: 20
+    return InkWell(
+        child: Text(
+        'About',
+        style: TextStyle(
+          color: primaryTextColor,
+          fontFamily: font,
+          fontSize: 20
+        )
       ),
+      onTap: () {
+        Navigator.pushNamed(context, AboutPage.id);
+      },
     );
   }
 }

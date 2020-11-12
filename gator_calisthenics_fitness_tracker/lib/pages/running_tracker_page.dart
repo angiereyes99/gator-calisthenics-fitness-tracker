@@ -2,8 +2,17 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gator_calisthenics_fitness_tracker/models/workouts_model.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
+import 'package:intl/intl.dart';
+
+
+final collection = FirebaseFirestore.instance.collection('running_times');
+final FirebaseAuth auth = FirebaseAuth.instance;
+
+String formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(DateTime.now());
+
 
 class RunningTrackerPage extends StatefulWidget {
   static final String id = 'running_tracker_id';
@@ -13,8 +22,6 @@ class RunningTrackerPage extends StatefulWidget {
 }
 
 class _RunningTrackerStatePage extends State<RunningTrackerPage> {
-  final collection = FirebaseFirestore.instance.collection('running_times');
-  final FirebaseAuth auth = FirebaseAuth.instance;
 
   static const duration = const Duration(seconds: 1);
 
@@ -34,6 +41,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
 
   @override
   Widget build(BuildContext context) {
+
     if (timer == null) {
       timer = Timer.periodic(duration, (Timer t) {
         handleTick();
@@ -47,7 +55,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
         minutes.toString().padLeft(2, '0') +
         ":" +
         seconds.toString().padLeft(2, '0');
-
+  
     return new Scaffold(
       backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
       appBar: AppBar(
@@ -64,9 +72,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            SizedBox(
-              height: 65,
-            ),
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -126,6 +132,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                               "email": auth.currentUser.email,
                               "duration": savedTime,
                               'has_completed': false,
+                              'datetime': formattedDate,
                             });
                           });
                         }
@@ -133,6 +140,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                 ),
               ],
             ),
+            SavedTimesStream(),
           ],
         ),
       ),
@@ -168,6 +176,93 @@ class LabelText extends StatelessWidget {
             style: TextStyle(
               color: Colors.white70,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SavedTimesStream extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot> (
+      stream: collection
+              .where('email', isEqualTo: auth.currentUser.email)
+              //.orderBy('datetime', descending: true)
+              .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: primaryBackground,
+            ),
+          );
+        }
+
+        final durations = snapshot.data.docs;
+        List<DurationCard> durationCards = [];
+
+        for (var duration in durations) {
+          final dur = duration['duration'];
+          final date = duration['datetime'];
+
+          final durationCard = DurationCard(
+            duration: dur,
+            datetime: date,
+          );
+          durationCards.add(durationCard);
+          WorkoutsModel.workouts.add('Run: $date \n  Duration: $dur');
+        }
+
+        return Expanded(
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+            children: durationCards,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class DurationCard extends StatelessWidget {
+
+  DurationCard({this.duration, this.datetime});
+
+  final String duration;
+  final String datetime;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            elevation: 25,
+            color: primaryBackgroundLight,
+            child: ListTile(
+              title: Text(
+                'Saved Running Time: $duration',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: font,
+                ),
+              ),
+              subtitle: Text(
+                'Saved on: $datetime',
+                style: TextStyle(
+                  fontFamily: font
+                ),
+              ),
+            )
           ),
         ],
       ),

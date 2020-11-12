@@ -120,7 +120,7 @@ class GoalsPageState extends State<GoalsPage> {
               Navigator.pop(context);
             },
             decoration: new InputDecoration(
-                hintText: 'Enter something to do...',
+                hintText: 'Enter your goal here!',
                 hintStyle: TextStyle(color: Colors.white),
                 contentPadding: const EdgeInsets.all(16.0)),
           ));

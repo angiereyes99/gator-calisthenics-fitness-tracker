@@ -20,3 +20,9 @@ const primaryBackground_unused = BoxDecoration(
   ),
 );
 
+const String aboutBio = 'Gator Calisthenics was developed during the COVID-19 pandemic.' +
+                        '\n\nWith many of the businesses, including gyms, closed, it seemed hard for' +
+                        ' many to find the motivation to be productive. While quarantine may have been' +
+                        ' a barrier for many, this app was desgined with the hopes to keep those who use it,' +
+                        ' motivated and ready to improve even during quarantine. Gator Calisthenics is' +
+                        ' a workout application where you dont need fancy equipment to improve your health.';
