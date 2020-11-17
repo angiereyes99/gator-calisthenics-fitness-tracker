@@ -41,6 +41,7 @@ Feel free to check her our on her github: [rezum](https://github.com/rezum)
 │    │      └── workouts_model.dart
 │    ├── pages
 │    │      ├── login_page.dart
+│    │      ├── about_page.dart
 │    │      ├── profile_page.dart
 │    │      ├── workouts_page.dart
 │    │      ├── goals_page.dart

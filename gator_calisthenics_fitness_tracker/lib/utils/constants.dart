@@ -7,6 +7,22 @@ const primaryTextColor = const Color(0xFF66BB6A);
 const navbarColor = const Color(0x1FFFFFFF);
 const font = 'Ubuntu';
 
+Map<String, dynamic> encodeMap(Map<DateTime, dynamic> map) {
+    Map<String, dynamic> newMap = {};
+    map.forEach((key, value) {
+      newMap[key.toString()] = map[key];
+    });
+    return newMap;
+}
+
+  Map<DateTime, dynamic> decodeMap(Map<String, dynamic> map) {
+    Map<DateTime, dynamic> newMap = {};
+    map.forEach((key, value) {
+      newMap[DateTime.parse(key)] = map[key];
+    });
+    return newMap;
+}
+
 /** UNUSED VARIABLES **/
 const Color gradientStart = const Color(0xFFC8E6C9);
 const Color gradientEnd = const Color(0xFF388E3C);
