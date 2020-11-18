@@ -28,7 +28,7 @@ class GoalsPageState extends State<GoalsPage> {
       backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: isDarkMode ? Colors.black : primaryBackgroundLight,
+        backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
         elevation: 0,
         title: new Text(
           'Set Your Fitness Goals Here!',
@@ -42,6 +42,13 @@ class GoalsPageState extends State<GoalsPage> {
       body: Center(
         child: Container(
             padding: const EdgeInsets.all(32.0),
+            decoration: BoxDecoration(
+              color: Color(0xff0E164C),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50),
+                topRight: Radius.circular(50)
+              )
+            ),
             child: StreamBuilder<QuerySnapshot>(
               stream: collection.where('email', isEqualTo: auth.currentUser.email).snapshots(),
               builder: (BuildContext context,
@@ -59,14 +66,14 @@ class GoalsPageState extends State<GoalsPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          elevation: 15,
-                          color: isDarkMode ? primaryTextColor : Colors.white,
+                          elevation: 5,
+                          color: primaryBackground,//isDarkMode ? primaryTextColor : Colors.white,
                           child: CheckboxListTile(
                             checkColor: Colors.black,
                             title: Text(
                               document['todo_item'],
                               style: TextStyle(
-                                color: Colors.black,
+                                color: primaryBackgroundLight,
                                 fontSize: 18,
                                 fontFamily: font,
                               ),
@@ -75,6 +82,7 @@ class GoalsPageState extends State<GoalsPage> {
                               "Goal created on: " + document["datetime"],
                               style: TextStyle(
                                 fontFamily: font,
+                                color: primaryTextColor,
                               ),
                             ),
                             value: document['has_completed'],

@@ -49,7 +49,8 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            TableCalendar(
+            Container (
+            child : TableCalendar(
               events: _events,
               initialCalendarFormat: CalendarFormat.week,
               calendarStyle: CalendarStyle(
@@ -100,6 +101,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                     )),
               ),
               calendarController: _controller,
+            ),
             ),
             SizedBox(
               height: 20,
