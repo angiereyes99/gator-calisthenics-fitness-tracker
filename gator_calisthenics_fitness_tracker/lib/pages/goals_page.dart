@@ -41,8 +41,9 @@ class GoalsPageState extends State<GoalsPage> {
       ),
       body: Center(
         child: Container(
-            padding: const EdgeInsets.all(32.0),
+            padding: EdgeInsets.symmetric(horizontal: 28.0, vertical: 10.0),
             decoration: BoxDecoration(
+              border: Border.all(color: Colors.blue[400],width: 10),
               color: Color(0xff0E164C),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(50),
@@ -74,7 +75,7 @@ class GoalsPageState extends State<GoalsPage> {
                               document['todo_item'],
                               style: TextStyle(
                                 color: primaryBackgroundLight,
-                                fontSize: 18,
+                                fontSize: 20,
                                 fontFamily: font,
                               ),
                             ),

@@ -44,7 +44,7 @@ class _MainNavigationState extends State<MainNavigation> {
       bottomNavigationBar: CurvedNavigationBar(
         index: _currentIndex,
         onTap: onTappedBar,
-        color: primaryTextColor,
+        color: isDarkMode ? primaryBackground : primaryBackgroundLight,
         items: [
           Icon(Icons.home, size: 30, color: Colors.white),
           Icon(Icons.directions_run, size: 30, color: Colors.white),
@@ -52,7 +52,7 @@ class _MainNavigationState extends State<MainNavigation> {
           Icon(Icons.star, size: 30, color: Colors.white),
           Icon(Icons.timelapse, size: 30, color: Colors.white),
         ],
-        backgroundColor: isDarkMode ? primaryBackground : Colors.white,
+        backgroundColor: isDarkMode ? Color(0xff0E164C) : Colors.white,
       ),
     );
   }

@@ -40,107 +40,127 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              CircleAvatar(
-                backgroundImage: NetworkImage(
-                  imageUrl,
-                ),
-                radius: 60,
-                backgroundColor: Colors.transparent,
-              ),
               SizedBox(height: 40),
-              Text(
-                'NAME',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: primaryTextColor,
-                ),
-              ),
-              Text(
-                name,
-                style: TextStyle(
-                    fontSize: 25,
-                    color: primaryTextColor,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
-              Text(
-                'EMAIL',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: primaryTextColor,
-                ),
-              ),
-              Text(
-                email,
-                style: TextStyle(
-                    fontSize: 25,
-                    color: primaryTextColor,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 40),
-              DropdownButton<ThemeModel>(
-                hint: Text(
-                  'Select Theme',
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.white : Colors.black,
-                    fontSize: 25,
-                  ),
-                ),
-                value: selected,
-                onChanged: (ThemeModel value) {
-                  setState(() {
-                    selected = value;
-                  });
-                },
-                items: lightingItems.map((ThemeModel lightingItem) {
-                  return DropdownMenuItem<ThemeModel>(
-                    onTap: () {
-                      if (lightingItem.type != 'Dark Mode') {
-                        isDarkMode = false;
-                      } else {
-                        isDarkMode = true;
-                      }
-                    },
-                    value: lightingItem,
-                    child: Row(
-                      children: <Widget>[
-                        lightingItem.icon,
-                        SizedBox(width: 10),
-                        Text(
-                          lightingItem.type,
-                          style: TextStyle(
-                            color: primaryTextColor,
-                            fontSize: 30,
-                            //fontFamily: font,
-                          ),
-                        )
-                      ],
+              Expanded(
+                child: Container(
+                padding: EdgeInsets.fromLTRB(50, 30, 50, 80),
+                decoration: BoxDecoration(
+                    color: Color(0xff0E164C),
+                    border: Border.all(color: Colors.blueAccent,width: 10),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        imageUrl,
+                      ),
+                      radius: 60,
+                      backgroundColor: Colors.transparent,
                     ),
-                  );
-                }).toList(),
-              ),
-              SizedBox(height: 40,),
-              RaisedButton(
-                onPressed: () {
-                  signOutGoogle();
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) {
-                    return LoginPage();
-                  }), ModalRoute.withName('/'));
-                },
-                color: primaryTextColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Sign Out',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  ),
+                    SizedBox(height: 40),
+                    Text(
+                      'NAME',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: primaryTextColor,
+                      ),
+                    ),
+                    Text(
+                      name,
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: primaryTextColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      'EMAIL',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: primaryTextColor,
+                      ),
+                    ),
+                    Text(
+                      email,
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: primaryTextColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 40),
+                    DropdownButton<ThemeModel>(
+                      hint: Text(
+                        'Select Theme',
+                        style: TextStyle(
+                          color: isDarkMode ? Colors.white : Colors.black,
+                          fontSize: 25,
+                        ),
+                      ),
+                      value: selected,
+                      onChanged: (ThemeModel value) {
+                        setState(() {
+                          selected = value;
+                        });
+                      },
+                      items: lightingItems.map((ThemeModel lightingItem) {
+                        return DropdownMenuItem<ThemeModel>(
+                          onTap: () {
+                            if (lightingItem.type != 'Dark Mode') {
+                              isDarkMode = false;
+                            } else {
+                              isDarkMode = true;
+                            }
+                          },
+                          value: lightingItem,
+                          child: Row(
+                            children: <Widget>[
+                              lightingItem.icon,
+                              SizedBox(width: 10),
+                              Text(
+                                lightingItem.type,
+                                style: TextStyle(
+                                  color: primaryTextColor,
+                                  fontSize: 30,
+                                  //fontFamily: font,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        signOutGoogle();
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) {
+                          return LoginPage();
+                        }), ModalRoute.withName('/'));
+                      },
+                      color: primaryTextColor,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Sign Out',
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        ),
+                      ),
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40)),
+                    ),
+                  ],
                 ),
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40)),
+                ),
               ),
             ],
           ),

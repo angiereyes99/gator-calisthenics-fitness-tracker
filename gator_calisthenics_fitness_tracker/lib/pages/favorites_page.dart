@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gator_calisthenics_fitness_tracker/models/workouts_model.dart';
 import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
+import 'package:intl/intl.dart';
 
 class FavoritesPage extends StatefulWidget {
 
@@ -18,6 +19,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   TextEditingController _textController = TextEditingController();
   final FirebaseAuth auth = FirebaseAuth.instance;
   final collection = FirebaseFirestore.instance.collection('favorites');
+  String formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(DateTime.now());
 
   static List<String> workoutsList = WorkoutsModel.workouts;
   List<String> newList = List.from(workoutsList);
@@ -165,7 +167,14 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 )
               : Center(
                 child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xff0E164C),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50)
+                    )
+                ),
+                padding: EdgeInsets.all(30.0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: collection.where('email', isEqualTo: auth.currentUser.email).snapshots(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -181,8 +190,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                         ),
-                        elevation: 15.0,
-                        color: isDarkMode ? primaryTextColor : primaryBackgroundLight,
+                        elevation: 10.0,
+                        color: isDarkMode ? primaryBackground : primaryBackgroundLight,
                         child: ListTile(
                           title: InkWell(
                             child: RichText(
@@ -197,14 +206,23 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                     TextSpan(
                                       text: ' ${document['workout']}',
                                       style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18.5,
+                                        fontFamily: font,
+                                        color: primaryBackgroundLight,
+                                        fontSize: 20.5,
                                       )
                                     ),
                                   ]),
                               ),
                           ),
-                        trailing: Icon(Icons.more_vert, color: primaryBackground),
+                          subtitle: Text(
+                            'Favorite added on: ${document['datetime']}',
+                            style: TextStyle(
+                              fontFamily: font,
+                              color: primaryTextColor,
+                              fontSize: 16.5,
+                            ),
+                          ),
+                        trailing: Icon(Icons.more_vert, color: primaryBackgroundLight),
                       )
                     );
                   }).toList(),
@@ -225,7 +243,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         collection.add({
           "workout": workout,
           "is_favorite": true,
-          "datetime": DateTime.now(),
+          "datetime": formattedDate,
           "email": auth.currentUser.email,
         });
         Navigator.pop(context);

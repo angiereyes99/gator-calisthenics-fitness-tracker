@@ -12,14 +12,14 @@ import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 void main() => runApp(GatorCalisthenics());
 
 class GatorCalisthenics extends StatelessWidget {
-  // This widget is the root of your application.
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         scaffoldBackgroundColor: Colors.black, 
-        unselectedWidgetColor: primaryBackground,
+        unselectedWidgetColor: Colors.white,
       ),
       initialRoute: LoginPage.id,
       routes: {

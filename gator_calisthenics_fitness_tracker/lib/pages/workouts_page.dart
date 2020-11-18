@@ -33,15 +33,15 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryBackgroundLight,
+      backgroundColor: primaryBackground,
       appBar: new AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: primaryBackgroundLight,
+        backgroundColor: primaryBackground,
         elevation: 0,
         title: new Text(
           'Keep track of your workouts!',
           style: TextStyle(
-            color: primaryBackground,
+            color: primaryBackgroundLight,
           ),
         ),
       ),
@@ -50,6 +50,16 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container (
+              decoration: new BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.blueAccent,width: 10),
+                borderRadius: new BorderRadius.only(
+                  topLeft: const Radius.circular(40.0),
+                  topRight: const Radius.circular(40.0),
+                  bottomLeft: const Radius.circular(40.0),
+                  bottomRight: const Radius.circular(40.0),
+              )
+            ),
             child : TableCalendar(
               events: _events,
               initialCalendarFormat: CalendarFormat.week,
@@ -97,7 +107,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(
                       date.day.toString(),
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.red),
                     )),
               ),
               calendarController: _controller,
