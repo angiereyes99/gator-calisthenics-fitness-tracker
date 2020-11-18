@@ -245,7 +245,7 @@ class DurationCard extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            elevation: 25,
+            elevation: 12,
             color: primaryBackgroundLight,
             child: ListTile(
               title: Text(

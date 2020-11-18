@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gator_calisthenics_fitness_tracker/pages/profile_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+final collection = FirebaseFirestore.instance.collection('workout_logs');
+final FirebaseAuth auth = FirebaseAuth.instance;
 
 class WorkoutsPage extends StatefulWidget {
   static final String id = 'workouts_page';
@@ -17,9 +20,6 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
   Map<DateTime, List<dynamic>> _events;
   List<dynamic> _selectedEvents;
   TextEditingController _eventController;
-  SharedPreferences prefs;
-
-  bool test = false;
 
   @override
   void initState() {
@@ -28,15 +28,6 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
     _eventController = TextEditingController();
     _events = {};
     _selectedEvents = [];
-    initPrefs();
-  }
-
-  initPrefs() async {
-    prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _events = Map<DateTime, List<dynamic>>.from(
-          decodeMap(json.decode(prefs.getString("events") ?? "{}")));
-    });
   }
 
   @override
@@ -110,39 +101,35 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
               ),
               calendarController: _controller,
             ),
-            SizedBox(height: 20,),
-            ..._selectedEvents.map((event) => Card(
-              color: primaryTextColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 10,
-              child: CheckboxListTile(
-                onChanged: (newValue) {
-                  print('lol');
-                  test = true;
-                  if (test == true) {
-                    _events.remove(event);
-                  }
-                  print(event);
-                },
-                checkColor: primaryBackground,
-                value: test,
-                title: Text(event),
+            SizedBox(
+              height: 20,
+            ),
+            ..._selectedEvents.map(
+              (event) => Card(
+                color: primaryTextColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                elevation: 10,
+                child: ListTile(
+                  title: Text(event),
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          _showAddDialog();
-          _events.remove('Bench Press');
-        }//_showAddDialog,
-      ),
+          child: Icon(Icons.add),
+          onPressed: () {
+            print(_events);
+            print(_selectedEvents);
+            _showAddDialog();
+          } //_showAddDialog,
+          ),
     );
   }
 
@@ -167,8 +154,14 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                         _eventController.text
                       ];
                     }
-                    prefs.setString("events", json.encode(encodeMap(_events)));
+                    print(_controller.selectedDay.toString() + '$_events');
                     _eventController.clear();
+                    collection.add({
+                      'email': auth.currentUser.email,
+                      'workout': {
+                        'test': _events,
+                      },
+                    });
                     Navigator.pop(context);
                   },
                 )

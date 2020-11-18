@@ -23,6 +23,17 @@ Map<String, dynamic> encodeMap(Map<DateTime, dynamic> map) {
     return newMap;
 }
 
+Size screenSize(BuildContext context) {
+  return MediaQuery.of(context).size;
+}
+
+double screenHeight(BuildContext context, {double dividedBy = 1}) {
+  return screenSize(context).height / dividedBy;
+}
+double screenWidth(BuildContext context, {double dividedBy = 1}) {
+  return screenSize(context).width / dividedBy;
+}
+
 /** UNUSED VARIABLES **/
 const Color gradientStart = const Color(0xFFC8E6C9);
 const Color gradientEnd = const Color(0xFF388E3C);
