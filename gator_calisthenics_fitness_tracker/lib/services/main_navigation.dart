@@ -7,9 +7,7 @@ import 'package:gator_calisthenics_fitness_tracker/pages/running_tracker_page.da
 import 'package:gator_calisthenics_fitness_tracker/pages/workouts_page.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
-
 class MainNavigation extends StatefulWidget {
-
   static final String id = 'profile_page';
 
   @override
@@ -17,19 +15,14 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
-
   int _currentIndex = 0;
-  final List<Widget> _pages = List<Widget>();
-
-  @override
-  void initState() {
-    _pages.add(ProfilePage());
-    _pages.add(WorkoutsPage());
-    _pages.add(GoalsPage());
-    _pages.add(FavoritesPage());
-    _pages.add(RunningTrackerPage());
-    super.initState();
-  }
+  final List<Widget> _pages = [
+    ProfilePage(),
+    WorkoutsPage(),
+    GoalsPage(),
+    FavoritesPage(),
+    RunningTrackerPage()
+  ];
 
   void onTappedBar(int index) {
     setState(() {
@@ -41,18 +34,62 @@ class _MainNavigationState extends State<MainNavigation> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: _pages[_currentIndex],
-      bottomNavigationBar: CurvedNavigationBar(
-        index: _currentIndex,
-        onTap: onTappedBar,
-        color: isDarkMode ? primaryBackground : primaryBackgroundLight,
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: primaryBackground,
+        currentIndex: _currentIndex,
         items: [
-          Icon(Icons.home, size: 30, color: Colors.white),
-          Icon(Icons.directions_run, size: 30, color: Colors.white),
-          Icon(Icons.bookmark, size: 30, color: Colors.white),
-          Icon(Icons.star, size: 30, color: Colors.white),
-          Icon(Icons.timelapse, size: 30, color: Colors.white),
+          BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.home,
+                color: cardColor,
+              ),
+              title: new Text(
+                'Home',
+                style: TextStyle(color: primaryBackgroundLight),
+              )),
+          BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.directions_run,
+                color: cardColor,
+              ),
+              title: new Text(
+                'Workouts',
+                style: TextStyle(color: primaryBackgroundLight),
+              )),
+          BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.bookmark,
+                color: cardColor,
+              ),
+              title: new Text(
+                'Goals',
+                style: TextStyle(color: primaryBackgroundLight),
+              )),
+          BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.star,
+                color: cardColor,
+              ), 
+              title: new Text(
+                'Favorites',
+                style: TextStyle(
+                  color: primaryBackgroundLight
+                ),
+              )),
+          BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.timelapse,
+                color: cardColor,
+              ), 
+              title: new Text(
+                'Tracker',
+                style: TextStyle(
+                  color: primaryBackgroundLight
+                ),
+              )),
         ],
-        backgroundColor: isDarkMode ? Color(0xff0E164C) : Colors.white,
+        onTap: onTappedBar,
       ),
     );
   }

@@ -27,14 +27,15 @@ class _FavoritesPageState extends State<FavoritesPage> {
   bool isFinding = false;
   Icon searchIcon = Icon(
     Icons.search,
-    color: primaryTextColor,
+    color: primaryBackgroundLight,
+    size: 30,
   );
 
   Widget cusSearchBar = Text(
     'List down your favorite exercises!',
     style: TextStyle(
       //fontFamily: font,
-      fontSize: 16.0,
+      fontSize: 20.0,
       color: isDarkMode ? primaryBackgroundLight : primaryBackground,
     ),
   );
@@ -68,7 +69,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 if (this.searchIcon.icon == Icons.search) {
                   this.searchIcon = Icon(
                     Icons.arrow_forward,
-                    color: primaryTextColor,
+                    color: primaryBackgroundLight,
+                    size: 30,
                   );
                   this.cusSearchBar = TextField (
                     controller: _textController,
@@ -79,7 +81,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       hintText: 'Search for workouts here...',
                       hintStyle: TextStyle(
                         color: isDarkMode ? Colors.white70 : primaryBackground,
-                        fontFamily: font,
+                        // fontFamily: font,
                       ),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -109,7 +111,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   this.cusSearchBar = Text(
                     'List down your favorite exercises!',
                     style: TextStyle(
-                      fontFamily: font,
+                      // fontFamily: font,
                       color: isDarkMode ? primaryBackgroundLight : primaryBackground,
                     ),
                   );
@@ -151,7 +153,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                   text: ' ${newList[index]} ',
                                   style: TextStyle(
                                     fontSize: 18.0,
-                                    fontFamily: font,
+                                    // fontFamily: font,
                                     fontWeight: FontWeight.w400,
                                     color: isDarkMode ? primaryBackgroundLight : primaryBackground,
                                   ),
@@ -167,14 +169,14 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 )
               : Center(
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xff0E164C),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50)
-                    )
+                  padding: EdgeInsets.symmetric(horizontal: 28.0, vertical: 25.0),
+                decoration: BoxDecoration(
+                  color: Color(0xff0E164C),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.lerp(Radius.circular(0), Radius.circular(100), 40),
+                    topRight: Radius.lerp(Radius.circular(10), Radius.circular(10), 50),
+                  )
                 ),
-                padding: EdgeInsets.all(30.0),
                 child: StreamBuilder<QuerySnapshot>(
                   stream: collection.where('email', isEqualTo: auth.currentUser.email).snapshots(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -188,10 +190,15 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             children: snapshot.data.docs.map((DocumentSnapshot document) {
                                 return Card(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                        ),
+                                    borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10.0),
+                                    bottomLeft:  Radius.circular(10.0),
+                                    topRight: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                                    bottomRight: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                            ),
+                          ),
                         elevation: 10.0,
-                        color: isDarkMode ? primaryBackground : primaryBackgroundLight,
+                        color: cardColor,
                         child: ListTile(
                           title: InkWell(
                             child: RichText(
@@ -201,14 +208,14 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                     child: Icon(
                                       Icons.favorite,
                                       color: Colors.red,
-                                      size: 19,
+                                      size: 20,
                                     )),
                                     TextSpan(
                                       text: ' ${document['workout']}',
                                       style: TextStyle(
-                                        fontFamily: font,
+                                        // fontFamily: font,
                                         color: primaryBackgroundLight,
-                                        fontSize: 20.5,
+                                        fontSize: 18,
                                       )
                                     ),
                                   ]),
@@ -217,9 +224,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
                           subtitle: Text(
                             'Favorite added on: ${document['datetime']}',
                             style: TextStyle(
-                              fontFamily: font,
+                              // fontFamily: font,
                               color: primaryTextColor,
-                              fontSize: 16.5,
+                              fontSize: 14,
                             ),
                           ),
                         trailing: Icon(Icons.more_vert, color: primaryBackgroundLight),

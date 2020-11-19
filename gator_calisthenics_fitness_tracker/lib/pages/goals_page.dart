@@ -14,8 +14,10 @@ class GoalsPage extends StatefulWidget {
 }
 
 class GoalsPageState extends State<GoalsPage> {
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   final collection = FirebaseFirestore.instance.collection('todos');
+  TextEditingController _goalController;
 
   List<String> _todoItems = [];
   bool test = false;
@@ -34,22 +36,20 @@ class GoalsPageState extends State<GoalsPage> {
           'Set Your Fitness Goals Here!',
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
-            fontFamily: font,
-            fontSize: 30
+            fontSize: 20
           ),
         ),
       ),
-      body: Center(
-        child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 28.0, vertical: 10.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.blue[400],width: 10),
-              color: Color(0xff0E164C),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50),
-                topRight: Radius.circular(50)
-              )
-            ),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 28.0, vertical: 40.0),
+        decoration: BoxDecoration(
+          color: Color(0xff0E164C),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.lerp(Radius.circular(0), Radius.circular(100), 40),
+            topRight: Radius.lerp(Radius.circular(10), Radius.circular(10), 50),
+          )
+        ),
+        child: Center(
             child: StreamBuilder<QuerySnapshot>(
               stream: collection.where('email', isEqualTo: auth.currentUser.email).snapshots(),
               builder: (BuildContext context,
@@ -65,24 +65,28 @@ class GoalsPageState extends State<GoalsPage> {
                         snapshot.data.docs.map((DocumentSnapshot document) {
                       return Card(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10.0),
+                              bottomLeft:  Radius.circular(10.0),
+                              topRight: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                              bottomRight: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                            ),
                           ),
                           elevation: 5,
-                          color: primaryBackground,//isDarkMode ? primaryTextColor : Colors.white,
+                          color: Color(0xFF607D8B),
                           child: CheckboxListTile(
                             checkColor: Colors.black,
                             title: Text(
                               document['todo_item'],
                               style: TextStyle(
                                 color: primaryBackgroundLight,
-                                fontSize: 20,
-                                fontFamily: font,
+                                fontSize: 16,
                               ),
                             ),
                             subtitle: Text(
                               "Goal created on: " + document["datetime"],
                               style: TextStyle(
-                                fontFamily: font,
+                                // fontFamily: font,
                                 color: primaryTextColor,
                               ),
                             ),
@@ -95,23 +99,27 @@ class GoalsPageState extends State<GoalsPage> {
                                 collection.doc(document.id).delete();
                               }
                             },
-                          ));
+                          ),);
                     }).toList(),
                   );
                 }
               },
             )),
       ),
-      floatingActionButton: new FloatingActionButton(
-          backgroundColor: Colors.white,
+      floatingActionButton: new FloatingActionButton.extended(
+          label: Text('Add Goal Here!', style: TextStyle(color: primaryBackgroundLight),),
+          backgroundColor: Colors.black,
           onPressed: () {
             _pushAddTodoScreen();
           },
           tooltip: 'Add task',
-          child: new Icon(
+          icon: new Icon(
             Icons.bookmark,
-            color: Colors.black,
-          )),
+            color: primaryBackgroundLight,
+            size: 30,
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,  
     );
   }
 
@@ -152,12 +160,11 @@ class GoalsPageState extends State<GoalsPage> {
     }
   }
 
-  bool confirmCompletedDialogue(bool test) {
+  void confirmCompletedDialogue(String val) {
     Widget confirmButton = FlatButton(
       child: Text('Achieved!'),
       onPressed: () {
-        test = true;
-        print(test);
+        _addTodoItem(val);
         Navigator.pop(context);
       },
     );
@@ -165,16 +172,15 @@ class GoalsPageState extends State<GoalsPage> {
     Widget cancelButton = FlatButton(
       child: Text('Cancel'),
       onPressed: () {
-        test = false;
-        print(test);
         Navigator.pop(context);
       },
     );
 
     AlertDialog confirm = AlertDialog(
       title: Text('Did you achieve this goal?'),
-      content:
-          Text('Setting goals is the best way to keep yourself accountable!'),
+      content: TextField(
+        controller: _goalController
+      ),
       actions: [confirmButton, cancelButton],
     );
 
@@ -184,8 +190,6 @@ class GoalsPageState extends State<GoalsPage> {
         return confirm;
       },
     );
-
-    return test;
   }
 
   void _removeTodoItem(int index) {

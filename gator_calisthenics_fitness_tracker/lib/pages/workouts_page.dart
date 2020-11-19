@@ -52,7 +52,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
             Container (
               decoration: new BoxDecoration(
                 color: Colors.white,
-                border: Border.all(color: Colors.blueAccent,width: 10),
+                border: Border.all(color: cardColor ,width: 4),
                 borderRadius: new BorderRadius.only(
                   topLeft: const Radius.circular(40.0),
                   topRight: const Radius.circular(40.0),
@@ -62,7 +62,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
             ),
             child : TableCalendar(
               events: _events,
-              initialCalendarFormat: CalendarFormat.week,
+              initialCalendarFormat: CalendarFormat.month,
               calendarStyle: CalendarStyle(
                   canEventMarkersOverflow: true,
                   todayColor: Colors.orange,

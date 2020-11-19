@@ -22,38 +22,50 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: primaryBackground,
       body: Stack(
         children: <Widget>[
-          Particles(15, primaryTextColor),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Image(image: AssetImage("assets/homelogo.PNG"), height: 180.0,),
-                SizedBox(height: 10,),
-                Text(
-                  'Gator Calisthenics Fitness Tracker',
-                  style: TextStyle(
-                    fontSize: 32.0,
-                    fontFamily: font,
-                    color: primaryTextColor,
+          Particles(15, cardColor),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 40.0),
+            decoration: BoxDecoration(
+              color: Color(0xff0E164C),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.lerp(Radius.circular(0), Radius.circular(220), 20),
+               // topRight: Radius.lerp(Radius.circular(10), Radius.circular(10), 50),
+                bottomLeft: Radius.lerp(Radius.circular(0), Radius.circular(0), 50),
+                bottomRight: Radius.lerp(Radius.circular(0), Radius.circular(220), 50),
+              )
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Image(image: AssetImage("assets/homelogo.PNG"), height: 180.0,),
+                  SizedBox(height: 10,),
+                  Text(
+                    'Gator Calisthenics Fitness Tracker',
+                    style: TextStyle(
+                      fontSize: 32.0,
+                      fontFamily: font,
+                      color: primaryBackgroundLight,
+                    ),
                   ),
-                ),
-                Text(
-                  'Begin your calisthenics journey!',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    height: 3.5,
-                    fontWeight: FontWeight.w400,
-                    color: primaryBackgroundLight,
-                    fontFamily: font,
+                  Text(
+                    'Begin your calisthenics journey!',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      height: 3.5,
+                      fontWeight: FontWeight.w400,
+                      color: primaryBackgroundLight,
+                      fontFamily: font,
+                    ),
                   ),
-                ),
-                SizedBox(height: 50,),
-                _signInButton(),
-                SizedBox(height: 25,),
-                _aboutLink(),
-              ],
-            )
+                  SizedBox(height: 50,),
+                  _signInButton(),
+                  SizedBox(height: 25,),
+                  _aboutLink(),
+                ],
+              )
+            ),
           ),
         ],
       ),

@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 
 const primaryBackground = const Color(0xFF010A43);
 const primaryBackgroundLight = const Color(0xFFFFFFFF);
-const primaryTextColor = const Color(0xFFFF2E63);
+const primaryTextColor = const Color(0xFF000000);
 const navbarColor = const Color(0x1FFFFFFF);
+const colorSecondaryColor = const Color(0xff0E164C);
+const cardColor = const Color(0xFF607D8B);
 const font = 'Ubuntu';
+
 
 Map<String, dynamic> encodeMap(Map<DateTime, dynamic> map) {
     Map<String, dynamic> newMap = {};

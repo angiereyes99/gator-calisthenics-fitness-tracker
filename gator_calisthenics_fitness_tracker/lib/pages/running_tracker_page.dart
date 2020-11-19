@@ -59,6 +59,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
     return new Scaffold(
       backgroundColor: isDarkMode ? primaryBackground : primaryBackgroundLight,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor:
             isDarkMode ? primaryBackground : primaryBackgroundLight,
         elevation: 0.0,
@@ -68,7 +69,15 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
               color: isDarkMode ? primaryBackgroundLight : primaryBackground),
         ),
       ),
-      body: Center(
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 30.0),
+        decoration: BoxDecoration(
+          color: Color(0xff0E164C),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.lerp(Radius.circular(0), Radius.circular(100), 40),
+            topRight: Radius.lerp(Radius.circular(10), Radius.circular(10), 50),
+          )
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
@@ -140,6 +149,7 @@ class _RunningTrackerStatePage extends State<RunningTrackerPage> {
                 ),
               ],
             ),
+            SizedBox(height: 20),
             SavedTimesStream(),
           ],
         ),
@@ -161,7 +171,8 @@ class LabelText extends StatelessWidget {
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: primaryTextColor,
+        border: Border.all(color: cardColor),
+        color: colorSecondaryColor,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -243,27 +254,32 @@ class DurationCard extends StatelessWidget {
         children: <Widget>[
           Card(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.0),
+                bottomLeft:  Radius.circular(10.0),
+                topRight: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                bottomRight: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+              ),
             ),
             elevation: 12,
-            color: primaryBackgroundLight,
+            color: cardColor,
             child: ListTile(
               title: Text(
                 'Saved Running Time: $duration',
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontFamily: font,
+                  color: primaryBackgroundLight,
+                  fontSize: 15,
                 ),
               ),
               subtitle: Text(
                 'Saved on: $datetime',
                 style: TextStyle(
-                  fontFamily: font
+                  color: Colors.black
                 ),
               ),
             )
           ),
+          SizedBox(height: 10),
         ],
       ),
     );
