@@ -96,47 +96,47 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 40),
-                      DropdownButton<ThemeModel>(
-                        hint: Text(
-                          'Select Theme',
-                          style: TextStyle(
-                            color: isDarkMode ? Colors.white : Colors.black,
-                            fontSize: 25,
-                          ),
-                        ),
-                        value: selected,
-                        onChanged: (ThemeModel value) {
-                          setState(() {
-                            selected = value;
-                          });
-                        },
-                        items: lightingItems.map((ThemeModel lightingItem) {
-                          return DropdownMenuItem<ThemeModel>(
-                            onTap: () {
-                              if (lightingItem.type != 'Dark Mode') {
-                                isDarkMode = false;
-                              } else {
-                                isDarkMode = true;
-                              }
-                            },
-                            value: lightingItem,
-                            child: Row(
-                              children: <Widget>[
-                                lightingItem.icon,
-                                SizedBox(width: 10),
-                                Text(
-                                  lightingItem.type,
-                                  style: TextStyle(
-                                    color: primaryBackgroundLight,
-                                    fontSize: 30,
-                                    //fontFamily: font,
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                      // DropdownButton<ThemeModel>(
+                      //   hint: Text(
+                      //     'Select Theme',
+                      //     style: TextStyle(
+                      //       color: isDarkMode ? Colors.white : Colors.black,
+                      //       fontSize: 25,
+                      //     ),
+                      //   ),
+                      //   value: selected,
+                      //   onChanged: (ThemeModel value) {
+                      //     setState(() {
+                      //       selected = value;
+                      //     });
+                      //   },
+                      //   items: lightingItems.map((ThemeModel lightingItem) {
+                      //     return DropdownMenuItem<ThemeModel>(
+                      //       onTap: () {
+                      //         if (lightingItem.type != 'Dark Mode') {
+                      //           isDarkMode = false;
+                      //         } else {
+                      //           isDarkMode = true;
+                      //         }
+                      //       },
+                      //       value: lightingItem,
+                      //       child: Row(
+                      //         children: <Widget>[
+                      //           lightingItem.icon,
+                      //           SizedBox(width: 10),
+                      //           Text(
+                      //             lightingItem.type,
+                      //             style: TextStyle(
+                      //               color: primaryBackgroundLight,
+                      //               fontSize: 30,
+                      //               //fontFamily: font,
+                      //             ),
+                      //           )
+                      //         ],
+                      //       ),
+                      //     );
+                      //   }).toList(),
+                      // ),
                       SizedBox(
                         height: 40,
                       ),

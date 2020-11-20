@@ -5,9 +5,7 @@ import 'package:gator_calisthenics_fitness_tracker/services/google_signing_servi
 import 'package:gator_calisthenics_fitness_tracker/services/main_navigation.dart';
 import 'package:gator_calisthenics_fitness_tracker/utils/constants.dart';
 
-
 class LoginPage extends StatefulWidget {
-
   static final String id = 'login_page';
 
   @override
@@ -22,51 +20,61 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: primaryBackground,
       body: Stack(
         children: <Widget>[
-          Particles(15, cardColor),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 40.0),
             decoration: BoxDecoration(
-              color: Color(0xff0E164C),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.lerp(Radius.circular(0), Radius.circular(220), 20),
-               // topRight: Radius.lerp(Radius.circular(10), Radius.circular(10), 50),
-                bottomLeft: Radius.lerp(Radius.circular(0), Radius.circular(0), 50),
-                bottomRight: Radius.lerp(Radius.circular(0), Radius.circular(220), 50),
-              )
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Image(image: AssetImage("assets/homelogo.PNG"), height: 180.0,),
-                  SizedBox(height: 10,),
-                  Text(
-                    'Gator Calisthenics Fitness Tracker',
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontFamily: font,
-                      color: primaryBackgroundLight,
-                    ),
-                  ),
-                  Text(
-                    'Begin your calisthenics journey!',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      height: 3.5,
-                      fontWeight: FontWeight.w400,
-                      color: primaryBackgroundLight,
-                      fontFamily: font,
-                    ),
-                  ),
-                  SizedBox(height: 50,),
-                  _signInButton(),
-                  SizedBox(height: 25,),
-                  _aboutLink(),
-                ],
-              )
-            ),
+                color: Color(0xff0E164C),
+                borderRadius: BorderRadius.only(
+                  topLeft:
+                      Radius.lerp(Radius.circular(0), Radius.circular(0), 50),
+                  topRight: 
+                      Radius.lerp(Radius.circular(0), Radius.circular(100), 50),
+                  bottomLeft:
+                      Radius.lerp(Radius.circular(0), Radius.circular(0), 50),
+                  bottomRight:
+                      Radius.lerp(Radius.circular(0), Radius.circular(100), 50),
+                )),
           ),
+          Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Image(
+                image: AssetImage("assets/homelogo.PNG"),
+                height: 180.0,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Gator Calisthenics Fitness Tracker',
+                style: TextStyle(
+                  fontSize: 32.0,
+                  fontFamily: font,
+                  color: primaryBackgroundLight,
+                ),
+              ),
+              Text(
+                'Begin your calisthenics journey!',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  height: 3.5,
+                  fontWeight: FontWeight.w400,
+                  color: primaryBackgroundLight,
+                  fontFamily: font,
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              _signInButton(),
+              SizedBox(
+                height: 25,
+              ),
+              _aboutLink(),
+            ],
+          )),
         ],
       ),
     );
@@ -116,14 +124,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _aboutLink() {
     return InkWell(
-        child: Text(
-        'About',
-        style: TextStyle(
-          color: primaryTextColor,
-          fontFamily: font,
-          fontSize: 20
-        )
-      ),
+      child: Text('About',
+          style: TextStyle(
+              color: primaryTextColor, fontFamily: font, fontSize: 20)),
       onTap: () {
         Navigator.pushNamed(context, AboutPage.id);
       },

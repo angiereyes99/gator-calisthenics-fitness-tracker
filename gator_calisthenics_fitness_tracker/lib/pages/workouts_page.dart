@@ -8,6 +8,7 @@ import 'package:table_calendar/table_calendar.dart';
 final collection = FirebaseFirestore.instance.collection('workout_logs');
 final FirebaseAuth auth = FirebaseAuth.instance;
 
+
 class WorkoutsPage extends StatefulWidget {
   static final String id = 'workouts_page';
 
@@ -16,6 +17,7 @@ class WorkoutsPage extends StatefulWidget {
 }
 
 class _WorkoutsPageState extends State<WorkoutsPage> {
+
   CalendarController _controller;
   Map<DateTime, List<dynamic>> _events;
   List<dynamic> _selectedEvents;
@@ -118,9 +120,14 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
             ),
             ..._selectedEvents.map(
               (event) => Card(
-                color: primaryTextColor,
+                color: cardColor,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                    bottomLeft:  Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                    topRight: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                    bottomRight: Radius.lerp(Radius.circular(30), Radius.circular(30), 6),
+                  ),
                 ),
                 elevation: 10,
                 child: ListTile(
@@ -137,8 +144,8 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            print(_events);
-            print(_selectedEvents);
+            // print(_controller.selectedDay.toString().runtimeType);
+            // print(_selectedEvents.runtimeType);
             _showAddDialog();
           } //_showAddDialog,
           ),
@@ -168,15 +175,23 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
                     }
                     print(_controller.selectedDay.toString() + '$_events');
                     _eventController.clear();
-                    collection.add({
-                      'email': auth.currentUser.email,
-                      'workout': {
-                        'test': _events,
-                      },
-                    });
+                    // collection.add({
+                    //   'email': auth.currentUser.email,
+                    //   'datetime': _controller.selectedDay.toString(),
+                    //   'exercises': _selectedEvents,
+                    // });
                     Navigator.pop(context);
                   },
-                )
+                ),
+                FlatButton (
+                  child: Text('Cancel'),
+                  onPressed: () {
+                    if (_eventController.text.isEmpty){
+                      Navigator.pop(context);
+                    };
+                    Navigator.pop(context);
+                  },
+                ),
               ],
             ));
     setState(() {

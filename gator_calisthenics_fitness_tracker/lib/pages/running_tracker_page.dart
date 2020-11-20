@@ -10,9 +10,7 @@ import 'package:intl/intl.dart';
 
 final collection = FirebaseFirestore.instance.collection('running_times');
 final FirebaseAuth auth = FirebaseAuth.instance;
-
 String formattedDate = DateFormat('MM-dd-yyyy HH:mm').format(DateTime.now());
-
 
 class RunningTrackerPage extends StatefulWidget {
   static final String id = 'running_tracker_id';
