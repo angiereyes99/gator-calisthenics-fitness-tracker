@@ -1,2 +1,2 @@
 # gator-calisthenics-fitness-tracker
-CSC642 Individual Project. Full stack mobile application. Purpose was for UI design. Added fully functional pages to store user data in real time.
+Full stack iOS application. A calisthenics and fitness application where users are can track their bodyweight workouts as well as set goals to accomplish. Data is stored in realtime using Firestore.
