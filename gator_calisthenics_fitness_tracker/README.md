@@ -17,7 +17,7 @@ Feel free to check her our on her github: [rezum](https://github.com/rezum)
 
 ### Building and Running Application
 
-**APPLICATION RUNS BEST ON VISUAL STUDIO CODE`**
+<mark>**APPLICATION RUNS BEST ON VISUAL STUDIO CODE`**</mark>
 
 • git clone the repo
 • cd to gator_calisthenics_fitness_tracker/gator_calisthenics_fitness_tracker
