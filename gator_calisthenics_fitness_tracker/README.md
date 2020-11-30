@@ -17,15 +17,24 @@ Feel free to check her our on her github: [rezum](https://github.com/rezum)
 
 ### Building and Running Application
 ```
-- cd to gator_calisthenics_fitness_tracker
+APPLICATION RUNS BEST ON VISUAL STUDIO CODE
 
-- pod repo update
+• git clone the repo
 
-- sudo gem install cocoapods
+• cd to gator_calisthenics_fitness_tracker/gator_calisthenics_fitness_tracker
 
-- pod setup
+• open iOS emulator device
 
-- flutter pub get
+In project directory in the terminal run:
+
+• flutter pub get 
+
+• flutter run
+
+• At this point, the project should be running pod install and Xcode build
+
+• Depending on your Mac and wifi, the wait time may vary! Dont stop it from <br> running and let it load!
+
 
 - open iOS simulator (iOS 9 or above)
 
