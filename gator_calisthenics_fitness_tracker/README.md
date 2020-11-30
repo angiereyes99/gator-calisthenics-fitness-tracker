@@ -15,7 +15,7 @@ Feel free to check her our on her github: [rezum](https://github.com/rezum)
 - [Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
 - [Xcode](https://developer.apple.com/xcode/)
 
-### Building and Running Application
+## Building and Running Application
 
 
 
