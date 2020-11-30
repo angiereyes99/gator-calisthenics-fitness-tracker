@@ -17,7 +17,9 @@ Feel free to check her our on her github: [rezum](https://github.com/rezum)
 
 ### Building and Running Application
 
-<mark>APPLICATION RUNS BEST ON VISUAL STUDIO CODE</mark>
+
+
+#### APPLICATION RUNS BEST ON VISUAL STUDIO CODE
 
 • git clone the repo
 • cd to gator_calisthenics_fitness_tracker/gator_calisthenics_fitness_tracker
@@ -29,7 +31,8 @@ In project directory in the terminal run:
 • flutter run or run 'F5'
 • At this point, the project should be running pod install and Xcode build and once its finished the app will launch!
 
-**DISCLAIMER: Depending on your Mac and wifi, the wait time may vary! Dont stop it from running and let it load!**
+#### DISCLAIMER: Depending on your Mac and wifi, the wait time may vary! Dont stop it from running and let it load!
+
 
 ## Application Structure
 ```bash
@@ -57,10 +60,14 @@ In project directory in the terminal run:
 └── README.md
 ```
 
+
+
 ## Firebase and Firestore
 Data is stored in Firebase's Firestore in real-time through my personal console. <br>
 If you would like to use your own Firebase console to view your data feel free to visit
 [adding Firebase to Flutter here](https://firebase.google.com/docs/flutter/setup). <br> Keep in mind the field names and structures when handling your new database.
+
+
 
 ## Firestore Structure
 ```bash
@@ -84,6 +91,8 @@ If you would like to use your own Firebase console to view your data feel free t
 │       └── 'has_completed': boolean
 
 ```
+
+
 
 ## Help
 For help getting started with Flutter, view the
