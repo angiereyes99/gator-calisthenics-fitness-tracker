@@ -17,7 +17,7 @@ Feel free to check her our on her github: [rezum](https://github.com/rezum)
 
 ### Building and Running Application
 
-<mark>**APPLICATION RUNS BEST ON VISUAL STUDIO CODE`**</mark>
+<mark>APPLICATION RUNS BEST ON VISUAL STUDIO CODE</mark>
 
 • git clone the repo
 • cd to gator_calisthenics_fitness_tracker/gator_calisthenics_fitness_tracker
@@ -31,7 +31,7 @@ In project directory in the terminal run:
 
 **DISCLAIMER: Depending on your Mac and wifi, the wait time may vary! Dont stop it from running and let it load!**
 
-### Application Structure
+## Application Structure
 ```bash
 .
 ├── lib
